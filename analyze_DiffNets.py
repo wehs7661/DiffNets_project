@@ -65,6 +65,9 @@ def stdout_redirected(to=os.devnull, stdout=None):
             stdout.flush()
             os.dup2(copied.fileno(), stdout_fd)  # $ exec >&copied
 
+def merged_stderr_stdout():  # $ exec 2>&1
+    return stdout_redirected(to=sys.stdout, stdout=sys.stderr)
+
 def logger(*args, **kwargs):
     print(*args, **kwargs)
     with open('results_run_diffnets.txt', "a") as f:
@@ -99,20 +102,21 @@ if __name__ == "__main__":
 
         stdout_fd = sys.stdout.fileno()
         with open('results_run_diffnets.txt', 'a') as f, stdout_redirected(f):
-            os.system(f'{main_code} analyze ./whitened_data {args.diffnets}')
+            with merged_stderr_stdout():
+                os.system(f'{main_code} analyze ./whitened_data {args.diffnets}')
 
         t2 = time.time()
         logger(f'Time elapsed: {format_time(t2 - t1)}')
 
     if '2' in args.actions:
-        logger('\nPart 2: Perform sanity checks for the trained DiffNets ...')
-        logger('============================================================')
+        logger('\nPart 2: Perform additional analysis for the trained DiffNets ...')
+        logger('==================================================================')
         t1 = time.time()
 
-        logger('[ Check 1: Average reconstructed RMSD ]')
+        logger('Performing sanity checks ...')
+        logger('    [ Check 1: Average reconstructed RMSD ]')
         rmsd = np.load(os.path.join(args.diffnets, "rmsd.npy"))  # nm
-        logger('Note that ideally, RSMD between the input and the reconstructed output should be less than 1.5 angstroms.')
-        logger(f'==> Result: The average RMSD is {np.mean(rmsd) * 10:.2f} angstrom.')
+        logger(f'    ==> Result: The average RMSD is {np.mean(rmsd) * 10:.2f} angstrom.')
         plt.figure()
         plt.hist(rmsd * 10, bins=100)
         plt.xlabel('RMSD ($ \AA $)')
@@ -121,7 +125,7 @@ if __name__ == "__main__":
         plt.grid()
         plt.savefig('RMSD_distribution.png', dpi=600)
 
-        logger('\n[ Check 2: Output label distribution ]') 
+        logger('\n    [ Check 2: Output label distribution ]') 
         lab_fns = utils.get_fns(os.path.join(args.diffnets, "labels"), "*.npy")
         traj_d_path = os.path.join('./whitened_data', "traj_dict.pkl")
         traj_d = pickle.load(open(traj_d_path, 'rb'))
@@ -143,9 +147,27 @@ if __name__ == "__main__":
         plt.legend()
         plt.savefig('label_plot.png', dpi=600)
 
-        logger('\n[ Check 3: AUC calculation ]') 
+        """
+        logger('\n    [ Check 3: AUC calculation ]') 
         net_fn = os.path.join(args.diffnets, 'nn_best_polish.pkl')
         out_fn = 'auc_plot'  # acutally not active in original code of `calc_auc`
         cm = np.load('./whitened_data/cm.npy')
         xtc_dir = 'whitened_data/aligned_xtcs'
-
+        """
+        
+        """
+        logger('\nPlotting the loss functions as a function of time ...\n')
+        loss = np.load(f'{args.diffnets}/all_loss_term_polish.npy')
+        legends = ['L1 norm', 'MSE', 'BCE', 'Cov. penalty']
+        n_epochs = len(loss[0])
+        plt.figure()
+        for i in range(len(loss)):
+            plt.plot(np.arange(1, n_epochs + 1), loss[i], label='legends[0')
+        plt.xlabel('Number of epochs')
+        plt.ylabel('Loss function')
+        plt.grid()
+        plt.legend()
+        plt.savefig('loss_epochs.png', dpi=600)
+        """
+        t2 = time.time()
+        logger(f'Time elapsed: {format_time(t2 - t1)}')
