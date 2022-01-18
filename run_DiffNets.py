@@ -5,8 +5,11 @@ import numpy as np
 import mdtraj as md
 import time
 import datetime
+import psutil
 from contextlib import contextmanager
 from argparse import RawTextHelpFormatter
+from diffnets.nnutils import split_inds
+from memory_profiler import memory_usage
 
 class ImproperlyConfigured(Exception):
     '''The given configuration is incomplete or otherwise not usable.'''
@@ -61,6 +64,20 @@ def initialize():
         default='name C or name CA or name N',  # backbone atoms according to GROMACS' definition
         help="Strings for selecting atoms for trajectory alignment. The input string should follows" 
              "mdtraj atom selection syntax (e.g. name C or name CA or name CB or name N)."
+    )
+    parser.add_argument(
+        "-r",
+        "--res",
+        type=int,
+        help="The residue (1-based) of interest in the focused region for a split autoencoder."
+    )
+    parser.add_argument(
+        "-d",
+        "--dist",
+        type=float,
+        default=1.0, 
+        help="The cutoff distance from the residue of interest, within which the residues will be "
+             "classified in the focused region. (Default: 1.0 nm)"
     )
 
     args_parse = parser.parse_args()
@@ -144,6 +161,31 @@ def compare_atom_sel(u1, u2, sel_1, sel_2):
         raise ImproperlyConfigured(
             f'The residue types of selected atoms are different from those in the WT!')
 
+def run_command(cmd):
+    """This is only for more convenient memory profiling"""
+    os.system(cmd)
+
+def convert_memory_units(mem):
+    """
+    mem: RAM memory usage in MB (default units of memory_usage)
+    """
+    power = 1024
+    mem *= power ** 2   # first convert to byte
+
+    # Get the total available RAM memory
+    tot_mem = psutil.virtual_memory().total   # in byte
+    mem_percent = mem / tot_mem * 100  
+
+    # Convert units
+    n = 0
+    power_labels = {0: '', 1: 'k', 2: 'M', 3: 'G', 4: 'T'}
+    while mem > power:
+        mem /= power
+        n += 1
+    mem_str = f'{mem: .2f} {power_labels[n]}B'
+
+    return mem_str, mem_percent
+
 
 if __name__ == "__main__":
     args = initialize()
@@ -217,10 +259,16 @@ if __name__ == "__main__":
         # All variants should have the same list of indices given the same region of interest and close_inds only contains one list
         # Here we use first wildtype structures to define the region
         u = md.load(os.readlink(f'./data/{Sys[i]}_GF_1.pdb'))
-        if args.property == '1':       # dimerization property 
-            region_idx = u.top.select("resid 43 to 46")  # dimer interface B23-B26 (resid (0-based) 43 to 46)
-        elif args.property == '2':     # proteolytic stability
-            region_idx = u.top.select("resid 42 to 48")  # P3--P2' region B22-B28 (resid 42 to 48)
+        
+        if args.res is not None:
+            close_xyz_inds, non_close_xyz_inds = split_inds(u, args.res, args.dist)
+            region_idx = [int(i) for i in close_xyz_inds[::3]/3]  # could include water/ions
+        else:
+            if args.property == '1':       # dimerization property 
+                region_idx = u.top.select("resid 43 to 46")  # dimer interface B23-B26 (resid (0-based) 43 to 46)
+            elif args.property == '2':     # proteolytic stability
+                region_idx = u.top.select("resid 42 to 48")  # P3--P2' region B22-B28 (resid 42 to 48)
+        
         for j in region_idx:
             if j in atoms:
                 close_inds.append(atoms.index(j))
@@ -238,13 +286,19 @@ if __name__ == "__main__":
     if '3' in args.actions:
         logger('\nStep 3: Performing whitening transformation ...')
         logger('===============================================')
+        print(f'Total available memory: {psutil.virtual_memory().total}')
         t1 = time.time()
 
         with open('results_run_diffnets.txt', 'a') as f, stdout_redirected(f):
             with merged_stderr_stdout():
-                os.system(f'{main_code} process ./traj_dirs.npy ./pdb_fns.npy ./whitened_data -aatom_sel.npy -sstride.npy')
+                # Below we run the command and get its maximum memory usage
+                cmd = f'{main_code} process ./traj_dirs.npy ./pdb_fns.npy ./whitened_data -aatom_sel.npy -sstride.npy'
+                mem = memory_usage((run_command, (cmd,)))
+                max_mem, max_mem_percent = convert_memory_units(np.max(mem))
 
         t2 = time.time()
+
+        logger(f'The maximum memory usage of data whitening was: {max_mem} ({max_mem_percent:.1f}%).')
         logger(f'Time elapsed: {format_time(t2 - t1)}')
         
     # Step 4: Training DiffNets
@@ -255,8 +309,12 @@ if __name__ == "__main__":
 
         with open('results_run_diffnets.txt', 'a') as f, stdout_redirected(f):
             with merged_stderr_stdout():
-                os.system(f'{main_code} train config.yml')
+                # Below we run the command and get its maximum memory usage
+                cmd = f'{main_code} train config.yml'
+                mem = memory_usage((run_command, (cmd,)))
+                max_mem, max_mem_percent = convert_memory_units(np.max(mem))
 
         t2 = time.time()
+        logger(f'The maximum memory usage of data training was: {max_mem} ({max_mem_percent:.1f}%).')
         logger(f'Time elapsed: {format_time(t2 - t1)}')
 

@@ -1,0 +1,2188 @@
+Command line: run_DiffNets.py -m 4EYD -p 1 -a 4
+
+Step 4: Training DiffNets ...
+===============================
+Is CUDA used or not? True
+
+Assigning classification labels for all simulation frames ...
+Splitting the dataset into training/validation sets ...
+Constructing data generators for training, validation, and expectation maximization ... 
+Total number of examples in the original dataset: 400004
+    Number of samples in the training set: 360004
+    Number of samples in the validation set: 40000
+    (subsample=1, batch_size=32) -> 11251 batches
+
+Constructing a split autoencoder ...
+    Encoder A: region of interest, Encoder B: rest of the system
+    Atoms (index, {resSeq}{resName}, {atom type}) in Encoder A:
+	[0, 1GLY, N]	[1, 1GLY, CA]	[2, 1GLY, C]
+	[3, 2ILE, N]	[4, 2ILE, CA]	[5, 2ILE, CB]
+	[6, 2ILE, C]	[7, 3VAL, N]	[8, 3VAL, CA]
+	[9, 3VAL, CB]	[10, 3VAL, C]	[11, 4GLU, N]
+	[12, 4GLU, CA]	[13, 4GLU, CB]	[14, 4GLU, C]
+	[15, 5GLN, N]	[16, 5GLN, CA]	[17, 5GLN, CB]
+	[18, 5GLN, C]	[19, 6CYS, N]	[20, 6CYS, CA]
+	[21, 6CYS, CB]	[22, 6CYS, C]	[23, 7CYS, N]
+	[24, 7CYS, CA]	[25, 7CYS, CB]	[26, 7CYS, C]
+	[27, 8THR, N]	[28, 8THR, CA]	[29, 8THR, CB]
+	[30, 8THR, C]	[31, 9SER, N]	[32, 9SER, CA]
+	[33, 9SER, CB]	[34, 9SER, C]	[35, 10ILE, N]
+	[36, 10ILE, CA]	[37, 10ILE, CB]	[38, 10ILE, C]
+	[39, 11CYS, N]	[40, 11CYS, CA]	[41, 11CYS, CB]
+	[42, 11CYS, C]	[43, 12SER, N]	[44, 12SER, CA]
+
+
+Note: Below are the weights of each kind of loss function:
+    Reconstruction loss: 1.0
+    Classification error: 1
+    Correlation penalty: 1
+    Building the encoders ...
+        Input dimension of layer 1 in Encoder A: 45
+        Output dimension of layer 1 in Encoder A: 12
+        Input dimension of layer 1 in Encoder B: 555
+        Output dimension of layer 1 in Encoder B: 138
+
+    Building the decoder ...
+
+Now training the 1st out of the 2 hidden layers ...
+
+    🤯 Going through the 1st epoch ...
+    [epoch: 1/10, batch: 1/11251]  train loss (L_tot): 5140837.00000   test loss (MSE): 915.23513
+    [epoch: 1/10, batch: 501/11251]  train loss (L_tot): 107601.86557   test loss (MSE): 10.96874
+    [epoch: 1/10, batch: 1001/11251]  train loss (L_tot): 2942.51938   test loss (MSE): 4.89312
+    [epoch: 1/10, batch: 1501/11251]  train loss (L_tot): 1367.19943   test loss (MSE): 2.83865
+    [epoch: 1/10, batch: 2001/11251]  train loss (L_tot): 655.33645   test loss (MSE): 1.98191
+    [epoch: 1/10, batch: 2501/11251]  train loss (L_tot): 380.50148   test loss (MSE): 1.56651
+    [epoch: 1/10, batch: 3001/11251]  train loss (L_tot): 211.30252   test loss (MSE): 1.36854
+    [epoch: 1/10, batch: 3501/11251]  train loss (L_tot): 126.92152   test loss (MSE): 1.27228
+    [epoch: 1/10, batch: 4001/11251]  train loss (L_tot): 88.84862   test loss (MSE): 1.22361
+    [epoch: 1/10, batch: 4501/11251]  train loss (L_tot): 60.74010   test loss (MSE): 1.19776
+    [epoch: 1/10, batch: 5001/11251]  train loss (L_tot): 43.87180   test loss (MSE): 1.18046
+    [epoch: 1/10, batch: 5501/11251]  train loss (L_tot): 32.54786   test loss (MSE): 1.17498
+    [epoch: 1/10, batch: 6001/11251]  train loss (L_tot): 25.27156   test loss (MSE): 1.16998
+    [epoch: 1/10, batch: 6501/11251]  train loss (L_tot): 19.31815   test loss (MSE): 1.17486
+    [epoch: 1/10, batch: 7001/11251]  train loss (L_tot): 14.16645   test loss (MSE): 1.17119
+    [epoch: 1/10, batch: 7501/11251]  train loss (L_tot): 13.05367   test loss (MSE): 1.17615
+    [epoch: 1/10, batch: 8001/11251]  train loss (L_tot): 10.92539   test loss (MSE): 1.18090
+    [epoch: 1/10, batch: 8501/11251]  train loss (L_tot): 10.01960   test loss (MSE): 1.17668
+    [epoch: 1/10, batch: 9001/11251]  train loss (L_tot): 9.34951   test loss (MSE): 1.22162
+    [epoch: 1/10, batch: 9501/11251]  train loss (L_tot): 9.80743   test loss (MSE): 1.18233
+    [epoch: 1/10, batch: 10001/11251]  train loss (L_tot): 6.76179   test loss (MSE): 1.17682
+    [epoch: 1/10, batch: 10501/11251]  train loss (L_tot): 5.93017   test loss (MSE): 1.15683
+    [epoch: 1/10, batch: 11001/11251]  train loss (L_tot): 4.96815   test loss (MSE): 1.16099
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    4 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label):
+	(2, 1.2297040)  (1, 2.6424358)  (2, 1.6385179)  (0, 5.1489377)
+
+
+    📝 (End of 1st epoch) Total validation loss of DiffNets: 2.7688
+        Reconstruction loss: 0.7696
+            L1 norm: 0.3220
+            MSE: 0.4476
+        Classification error: 0.5810
+        Correlation penalty: 1.4181
+
+    🤯 Going through the 2nd epoch ...
+    [epoch: 2/10, batch: 1/11251]  train loss (L_tot): 4.09190   test loss (MSE): 1.14268
+    [epoch: 2/10, batch: 501/11251]  train loss (L_tot): 4.52920   test loss (MSE): 1.13186
+    [epoch: 2/10, batch: 1001/11251]  train loss (L_tot): 3.57914   test loss (MSE): 1.12913
+    [epoch: 2/10, batch: 1501/11251]  train loss (L_tot): 3.31739   test loss (MSE): 1.12008
+    [epoch: 2/10, batch: 2001/11251]  train loss (L_tot): 3.01252   test loss (MSE): 1.10553
+    [epoch: 2/10, batch: 2501/11251]  train loss (L_tot): 2.86810   test loss (MSE): 1.09986
+    [epoch: 2/10, batch: 3001/11251]  train loss (L_tot): 2.76223   test loss (MSE): 1.10244
+    [epoch: 2/10, batch: 3501/11251]  train loss (L_tot): 2.69245   test loss (MSE): 1.09806
+    [epoch: 2/10, batch: 4001/11251]  train loss (L_tot): 2.65132   test loss (MSE): 1.09415
+    [epoch: 2/10, batch: 4501/11251]  train loss (L_tot): 2.64130   test loss (MSE): 1.10243
+    [epoch: 2/10, batch: 5001/11251]  train loss (L_tot): 2.62204   test loss (MSE): 1.10411
+    [epoch: 2/10, batch: 5501/11251]  train loss (L_tot): 1052.14069   test loss (MSE): 1.22207
+    [epoch: 2/10, batch: 6001/11251]  train loss (L_tot): 2.94273   test loss (MSE): 1.11430
+    [epoch: 2/10, batch: 6501/11251]  train loss (L_tot): 2.72529   test loss (MSE): 1.09123
+    [epoch: 2/10, batch: 7001/11251]  train loss (L_tot): 2.64187   test loss (MSE): 1.07911
+    [epoch: 2/10, batch: 7501/11251]  train loss (L_tot): 2.57912   test loss (MSE): 1.07013
+    [epoch: 2/10, batch: 8001/11251]  train loss (L_tot): 2.54897   test loss (MSE): 1.06297
+    [epoch: 2/10, batch: 8501/11251]  train loss (L_tot): 2.53621   test loss (MSE): 1.05589
+    [epoch: 2/10, batch: 9001/11251]  train loss (L_tot): 2.48870   test loss (MSE): 1.05216
+    [epoch: 2/10, batch: 9501/11251]  train loss (L_tot): 2.49246   test loss (MSE): 1.04784
+    [epoch: 2/10, batch: 10001/11251]  train loss (L_tot): 2.45621   test loss (MSE): 1.04323
+    [epoch: 2/10, batch: 10501/11251]  train loss (L_tot): 2.43811   test loss (MSE): 1.04191
+    [epoch: 2/10, batch: 11001/11251]  train loss (L_tot): 2.45415   test loss (MSE): 1.04755
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    1 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label): (2, 1.5427911)
+
+
+    📝 (End of 2nd epoch) Total validation loss of DiffNets: 2.5878
+        Reconstruction loss: 1.6783
+            L1 norm: 0.6610
+            MSE: 1.0173
+        Classification error: 0.6139
+        Correlation penalty: 0.2957
+
+    🤯 Going through the 3rd epoch ...
+    [epoch: 3/10, batch: 1/11251]  train loss (L_tot): 2.54634   test loss (MSE): 1.04682
+    [epoch: 3/10, batch: 501/11251]  train loss (L_tot): 2.44487   test loss (MSE): 1.04597
+    [epoch: 3/10, batch: 1001/11251]  train loss (L_tot): 2.45602   test loss (MSE): 1.04127
+    [epoch: 3/10, batch: 1501/11251]  train loss (L_tot): 2.44811   test loss (MSE): 1.05834
+    [epoch: 3/10, batch: 2001/11251]  train loss (L_tot): 2.45909   test loss (MSE): 1.05756
+    [epoch: 3/10, batch: 2501/11251]  train loss (L_tot): 2.44896   test loss (MSE): 1.05330
+    [epoch: 3/10, batch: 3001/11251]  train loss (L_tot): 2.47091   test loss (MSE): 1.06367
+    [epoch: 3/10, batch: 3501/11251]  train loss (L_tot): 2.49508   test loss (MSE): 1.08431
+    [epoch: 3/10, batch: 4001/11251]  train loss (L_tot): 2.49892   test loss (MSE): 1.09871
+    [epoch: 3/10, batch: 4501/11251]  train loss (L_tot): 223.07217   test loss (MSE): 1.09406
+    [epoch: 3/10, batch: 5001/11251]  train loss (L_tot): 2.55471   test loss (MSE): 1.06221
+    [epoch: 3/10, batch: 5501/11251]  train loss (L_tot): 2.46621   test loss (MSE): 1.04616
+    [epoch: 3/10, batch: 6001/11251]  train loss (L_tot): 2.41477   test loss (MSE): 1.03641
+    [epoch: 3/10, batch: 6501/11251]  train loss (L_tot): 2.40248   test loss (MSE): 1.03022
+    [epoch: 3/10, batch: 7001/11251]  train loss (L_tot): 2.38544   test loss (MSE): 1.02583
+    [epoch: 3/10, batch: 7501/11251]  train loss (L_tot): 2.39420   test loss (MSE): 1.02462
+    [epoch: 3/10, batch: 8001/11251]  train loss (L_tot): 2.38351   test loss (MSE): 1.02870
+    [epoch: 3/10, batch: 8501/11251]  train loss (L_tot): 2.38407   test loss (MSE): 1.03631
+    [epoch: 3/10, batch: 9001/11251]  train loss (L_tot): 2.37875   test loss (MSE): 1.04426
+    [epoch: 3/10, batch: 9501/11251]  train loss (L_tot): 2.39146   test loss (MSE): 1.03516
+    [epoch: 3/10, batch: 10001/11251]  train loss (L_tot): 2.40636   test loss (MSE): 1.05487
+    [epoch: 3/10, batch: 10501/11251]  train loss (L_tot): 2.42153   test loss (MSE): 1.05572
+    [epoch: 3/10, batch: 11001/11251]  train loss (L_tot): 2.44541   test loss (MSE): 1.06451
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    4 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label):
+	(1, 1.1310917)  (3, 1.0616300)  (2, 1.2224748)  (3, 1.2637018)
+
+
+    📝 (End of 3rd epoch) Total validation loss of DiffNets: 2.1083
+        Reconstruction loss: 1.3957
+            L1 norm: 0.5460
+            MSE: 0.8497
+        Classification error: 0.6710
+        Correlation penalty: 0.0416
+
+    🤯 Going through the 4th epoch ...
+    [epoch: 4/10, batch: 1/11251]  train loss (L_tot): 2.49869   test loss (MSE): 1.09432
+    [epoch: 4/10, batch: 501/11251]  train loss (L_tot): 2.47282   test loss (MSE): 1.09986
+    [epoch: 4/10, batch: 1001/11251]  train loss (L_tot): 2.50375   test loss (MSE): 1.08771
+    [epoch: 4/10, batch: 1501/11251]  train loss (L_tot): 2.54583   test loss (MSE): 1.08902
+    [epoch: 4/10, batch: 2001/11251]  train loss (L_tot): 425.94148   test loss (MSE): 1.13228
+    [epoch: 4/10, batch: 2501/11251]  train loss (L_tot): 2.63520   test loss (MSE): 1.05613
+    [epoch: 4/10, batch: 3001/11251]  train loss (L_tot): 2.53738   test loss (MSE): 1.03463
+    [epoch: 4/10, batch: 3501/11251]  train loss (L_tot): 2.47359   test loss (MSE): 1.02205
+    [epoch: 4/10, batch: 4001/11251]  train loss (L_tot): 2.45354   test loss (MSE): 1.01637
+    [epoch: 4/10, batch: 4501/11251]  train loss (L_tot): 2.40884   test loss (MSE): 1.00875
+    [epoch: 4/10, batch: 5001/11251]  train loss (L_tot): 2.37534   test loss (MSE): 1.00868
+    [epoch: 4/10, batch: 5501/11251]  train loss (L_tot): 2.36343   test loss (MSE): 1.00656
+    [epoch: 4/10, batch: 6001/11251]  train loss (L_tot): 2.37127   test loss (MSE): 1.00851
+    [epoch: 4/10, batch: 6501/11251]  train loss (L_tot): 2.38211   test loss (MSE): 1.00969
+    [epoch: 4/10, batch: 7001/11251]  train loss (L_tot): 2.36295   test loss (MSE): 1.00939
+    [epoch: 4/10, batch: 7501/11251]  train loss (L_tot): 2.36816   test loss (MSE): 1.01786
+    [epoch: 4/10, batch: 8001/11251]  train loss (L_tot): 2.39163   test loss (MSE): 1.01652
+    [epoch: 4/10, batch: 8501/11251]  train loss (L_tot): 2.38006   test loss (MSE): 1.03171
+    [epoch: 4/10, batch: 9001/11251]  train loss (L_tot): 2.40881   test loss (MSE): 1.03268
+    [epoch: 4/10, batch: 9501/11251]  train loss (L_tot): 2.42321   test loss (MSE): 1.04404
+    [epoch: 4/10, batch: 10001/11251]  train loss (L_tot): 2.43465   test loss (MSE): 1.05085
+    [epoch: 4/10, batch: 10501/11251]  train loss (L_tot): 2.45458   test loss (MSE): 1.05543
+    [epoch: 4/10, batch: 11001/11251]  train loss (L_tot): 2.48891   test loss (MSE): 1.07036
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    3 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label):
+	(1, 1.3956521)  (1, 1.8889937)  (2, 1.4565761)
+
+    📝 (End of 4th epoch) Total validation loss of DiffNets: 283.0497
+        Reconstruction loss: 2.2241
+            L1 norm: 0.7391
+            MSE: 1.4850
+        Classification error: 0.6913
+        Correlation penalty: 280.1343
+
+    🤯 Going through the 5th epoch ...
+    [epoch: 5/10, batch: 1/11251]  train loss (L_tot): 209.49568   test loss (MSE): 1.42032
+    [epoch: 5/10, batch: 501/11251]  train loss (L_tot): 12.34352   test loss (MSE): 1.06457
+    [epoch: 5/10, batch: 1001/11251]  train loss (L_tot): 2.54099   test loss (MSE): 1.03131
+    [epoch: 5/10, batch: 1501/11251]  train loss (L_tot): 2.44199   test loss (MSE): 1.01529
+    [epoch: 5/10, batch: 2001/11251]  train loss (L_tot): 2.38454   test loss (MSE): 1.00344
+    [epoch: 5/10, batch: 2501/11251]  train loss (L_tot): 2.35421   test loss (MSE): 0.99761
+    [epoch: 5/10, batch: 3001/11251]  train loss (L_tot): 2.34452   test loss (MSE): 0.99226
+    [epoch: 5/10, batch: 3501/11251]  train loss (L_tot): 2.32589   test loss (MSE): 0.98781
+    [epoch: 5/10, batch: 4001/11251]  train loss (L_tot): 2.31272   test loss (MSE): 0.98812
+    [epoch: 5/10, batch: 4501/11251]  train loss (L_tot): 2.31538   test loss (MSE): 0.98700
+    [epoch: 5/10, batch: 5001/11251]  train loss (L_tot): 2.31024   test loss (MSE): 0.99069
+    [epoch: 5/10, batch: 5501/11251]  train loss (L_tot): 2.32774   test loss (MSE): 0.99366
+    [epoch: 5/10, batch: 6001/11251]  train loss (L_tot): 2.32151   test loss (MSE): 0.99783
+    [epoch: 5/10, batch: 6501/11251]  train loss (L_tot): 2.33617   test loss (MSE): 1.00191
+    [epoch: 5/10, batch: 7001/11251]  train loss (L_tot): 2.34432   test loss (MSE): 1.01432
+    [epoch: 5/10, batch: 7501/11251]  train loss (L_tot): 2.37090   test loss (MSE): 1.04363
+    [epoch: 5/10, batch: 8001/11251]  train loss (L_tot): 2.39009   test loss (MSE): 1.04293
+    [epoch: 5/10, batch: 8501/11251]  train loss (L_tot): 2.40412   test loss (MSE): 1.05196
+    [epoch: 5/10, batch: 9001/11251]  train loss (L_tot): 2.41678   test loss (MSE): 1.04528
+    [epoch: 5/10, batch: 9501/11251]  train loss (L_tot): 2.44250   test loss (MSE): 1.04241
+    [epoch: 5/10, batch: 10001/11251]  train loss (L_tot): 2.48515   test loss (MSE): 1.07906
+    [epoch: 5/10, batch: 10501/11251]  train loss (L_tot): 2.50043   test loss (MSE): 1.07905
+    [epoch: 5/10, batch: 11001/11251]  train loss (L_tot): 2.57973   test loss (MSE): 1.09030
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    3 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label):
+	(2, 1.3368605)  (3, 4.7058353)  (2, 1.3194017)
+
+    📝 (End of 5th epoch) Total validation loss of DiffNets: 1.5775
+        Reconstruction loss: 0.8977
+            L1 norm: 0.3838
+            MSE: 0.5139
+        Classification error: 0.6794
+        Correlation penalty: 0.0004
+
+    🤯 Going through the 6th epoch ...
+    [epoch: 6/10, batch: 1/11251]  train loss (L_tot): 3.03101   test loss (MSE): 1.15176
+    [epoch: 6/10, batch: 501/11251]  train loss (L_tot): 397.11878   test loss (MSE): 1.05869
+    [epoch: 6/10, batch: 1001/11251]  train loss (L_tot): 2.47694   test loss (MSE): 1.01749
+    [epoch: 6/10, batch: 1501/11251]  train loss (L_tot): 2.40897   test loss (MSE): 0.99986
+    [epoch: 6/10, batch: 2001/11251]  train loss (L_tot): 2.34781   test loss (MSE): 0.99247
+    [epoch: 6/10, batch: 2501/11251]  train loss (L_tot): 2.33188   test loss (MSE): 0.98394
+    [epoch: 6/10, batch: 3001/11251]  train loss (L_tot): 2.33188   test loss (MSE): 0.98737
+    [epoch: 6/10, batch: 3501/11251]  train loss (L_tot): 2.32571   test loss (MSE): 0.98548
+    [epoch: 6/10, batch: 4001/11251]  train loss (L_tot): 2.32583   test loss (MSE): 0.98128
+    [epoch: 6/10, batch: 4501/11251]  train loss (L_tot): 2.33093   test loss (MSE): 0.98625
+    [epoch: 6/10, batch: 5001/11251]  train loss (L_tot): 2.32367   test loss (MSE): 0.99030
+    [epoch: 6/10, batch: 5501/11251]  train loss (L_tot): 2.31408   test loss (MSE): 0.99974
+    [epoch: 6/10, batch: 6001/11251]  train loss (L_tot): 2.32502   test loss (MSE): 1.00103
+    [epoch: 6/10, batch: 6501/11251]  train loss (L_tot): 2.35551   test loss (MSE): 1.00640
+    [epoch: 6/10, batch: 7001/11251]  train loss (L_tot): 2.36146   test loss (MSE): 1.01928
+    [epoch: 6/10, batch: 7501/11251]  train loss (L_tot): 2.38268   test loss (MSE): 1.03488
+    [epoch: 6/10, batch: 8001/11251]  train loss (L_tot): 2.40157   test loss (MSE): 1.03793
+    [epoch: 6/10, batch: 8501/11251]  train loss (L_tot): 2.43609   test loss (MSE): 1.06734
+    [epoch: 6/10, batch: 9001/11251]  train loss (L_tot): 2.45558   test loss (MSE): 1.06253
+    [epoch: 6/10, batch: 9501/11251]  train loss (L_tot): 2.45546   test loss (MSE): 1.06628
+    [epoch: 6/10, batch: 10001/11251]  train loss (L_tot): 2.49689   test loss (MSE): 1.08310
+    [epoch: 6/10, batch: 10501/11251]  train loss (L_tot): 418.97940   test loss (MSE): 1.08391
+    [epoch: 6/10, batch: 11001/11251]  train loss (L_tot): 2.59454   test loss (MSE): 1.02577
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    1 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label): (2, 1.8705156)
+
+
+    📝 (End of 6th epoch) Total validation loss of DiffNets: 2.7969
+        Reconstruction loss: 1.9763
+            L1 norm: 0.7880
+            MSE: 1.1883
+        Classification error: 0.6760
+        Correlation penalty: 0.1446
+
+    🤯 Going through the 7th epoch ...
+    [epoch: 7/10, batch: 1/11251]  train loss (L_tot): 2.31796   test loss (MSE): 1.01331
+    [epoch: 7/10, batch: 501/11251]  train loss (L_tot): 2.39645   test loss (MSE): 0.99768
+    [epoch: 7/10, batch: 1001/11251]  train loss (L_tot): 2.35235   test loss (MSE): 0.98820
+    [epoch: 7/10, batch: 1501/11251]  train loss (L_tot): 2.33573   test loss (MSE): 0.98351
+    [epoch: 7/10, batch: 2001/11251]  train loss (L_tot): 2.31802   test loss (MSE): 0.98313
+    [epoch: 7/10, batch: 2501/11251]  train loss (L_tot): 2.31170   test loss (MSE): 0.97757
+    [epoch: 7/10, batch: 3001/11251]  train loss (L_tot): 2.30832   test loss (MSE): 0.97566
+    [epoch: 7/10, batch: 3501/11251]  train loss (L_tot): 2.31217   test loss (MSE): 0.98183
+    [epoch: 7/10, batch: 4001/11251]  train loss (L_tot): 2.31127   test loss (MSE): 0.98206
+    [epoch: 7/10, batch: 4501/11251]  train loss (L_tot): 2.33112   test loss (MSE): 0.98699
+    [epoch: 7/10, batch: 5001/11251]  train loss (L_tot): 2.33564   test loss (MSE): 0.99769
+    [epoch: 7/10, batch: 5501/11251]  train loss (L_tot): 2.36256   test loss (MSE): 1.00464
+    [epoch: 7/10, batch: 6001/11251]  train loss (L_tot): 2.35148   test loss (MSE): 1.02537
+    [epoch: 7/10, batch: 6501/11251]  train loss (L_tot): 2.38393   test loss (MSE): 1.01671
+    [epoch: 7/10, batch: 7001/11251]  train loss (L_tot): 2.40766   test loss (MSE): 1.05893
+    [epoch: 7/10, batch: 7501/11251]  train loss (L_tot): 2.43418   test loss (MSE): 1.03816
+    [epoch: 7/10, batch: 8001/11251]  train loss (L_tot): 2.43525   test loss (MSE): 1.08456
+    [epoch: 7/10, batch: 8501/11251]  train loss (L_tot): 2.49680   test loss (MSE): 1.08834
+    [epoch: 7/10, batch: 9001/11251]  train loss (L_tot): 376.18665   test loss (MSE): 1.08596
+    [epoch: 7/10, batch: 9501/11251]  train loss (L_tot): 2.49896   test loss (MSE): 1.01880
+    [epoch: 7/10, batch: 10001/11251]  train loss (L_tot): 2.41534   test loss (MSE): 0.99839
+    [epoch: 7/10, batch: 10501/11251]  train loss (L_tot): 2.34602   test loss (MSE): 0.98683
+    [epoch: 7/10, batch: 11001/11251]  train loss (L_tot): 2.33763   test loss (MSE): 0.98151
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    2 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label): (3, 1.1410735)  (2, 1.5554531)
+
+
+    📝 (End of 7th epoch) Total validation loss of DiffNets: 2.8007
+        Reconstruction loss: 2.1167
+            L1 norm: 0.8330
+            MSE: 1.2837
+        Classification error: 0.6731
+        Correlation penalty: 0.0109
+
+    🤯 Going through the 8th epoch ...
+    [epoch: 8/10, batch: 1/11251]  train loss (L_tot): 2.25565   test loss (MSE): 0.97860
+    [epoch: 8/10, batch: 501/11251]  train loss (L_tot): 2.30918   test loss (MSE): 0.97556
+    [epoch: 8/10, batch: 1001/11251]  train loss (L_tot): 2.31086   test loss (MSE): 0.97515
+    [epoch: 8/10, batch: 1501/11251]  train loss (L_tot): 2.30615   test loss (MSE): 0.97636
+    [epoch: 8/10, batch: 2001/11251]  train loss (L_tot): 2.30547   test loss (MSE): 0.97648
+    [epoch: 8/10, batch: 2501/11251]  train loss (L_tot): 2.30327   test loss (MSE): 0.98682
+    [epoch: 8/10, batch: 3001/11251]  train loss (L_tot): 2.31452   test loss (MSE): 0.98851
+    [epoch: 8/10, batch: 3501/11251]  train loss (L_tot): 2.32075   test loss (MSE): 0.99710
+    [epoch: 8/10, batch: 4001/11251]  train loss (L_tot): 2.33974   test loss (MSE): 1.00382
+    [epoch: 8/10, batch: 4501/11251]  train loss (L_tot): 2.35921   test loss (MSE): 1.02318
+    [epoch: 8/10, batch: 5001/11251]  train loss (L_tot): 2.39302   test loss (MSE): 1.02539
+    [epoch: 8/10, batch: 5501/11251]  train loss (L_tot): 2.39671   test loss (MSE): 1.02969
+    [epoch: 8/10, batch: 6001/11251]  train loss (L_tot): 2.42192   test loss (MSE): 1.05895
+    [epoch: 8/10, batch: 6501/11251]  train loss (L_tot): 2.46057   test loss (MSE): 1.06774
+    [epoch: 8/10, batch: 7001/11251]  train loss (L_tot): 2.47146   test loss (MSE): 1.05184
+    [epoch: 8/10, batch: 7501/11251]  train loss (L_tot): 152.49537   test loss (MSE): 2.04768
+    [epoch: 8/10, batch: 8001/11251]  train loss (L_tot): 324.09221   test loss (MSE): 1.03868
+    [epoch: 8/10, batch: 8501/11251]  train loss (L_tot): 2.49452   test loss (MSE): 1.00716
+    [epoch: 8/10, batch: 9001/11251]  train loss (L_tot): 2.42792   test loss (MSE): 0.99056
+    [epoch: 8/10, batch: 9501/11251]  train loss (L_tot): 2.37770   test loss (MSE): 0.98092
+    [epoch: 8/10, batch: 10001/11251]  train loss (L_tot): 2.35577   test loss (MSE): 0.97631
+    [epoch: 8/10, batch: 10501/11251]  train loss (L_tot): 2.32316   test loss (MSE): 0.97368
+    [epoch: 8/10, batch: 11001/11251]  train loss (L_tot): 2.32079   test loss (MSE): 0.97228
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    4 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label):
+	(3, 1.1234806)  (1, 1.9369316)  (3, 1.1176459)  (2, 1.0494878)
+
+
+    📝 (End of 8th epoch) Total validation loss of DiffNets: 2.4468
+        Reconstruction loss: 1.7365
+            L1 norm: 0.7190
+            MSE: 1.0175
+        Classification error: 0.6622
+        Correlation penalty: 0.0480
+
+    🤯 Going through the 9th epoch ...
+    [epoch: 9/10, batch: 1/11251]  train loss (L_tot): 2.41702   test loss (MSE): 0.97682
+    [epoch: 9/10, batch: 501/11251]  train loss (L_tot): 2.31442   test loss (MSE): 0.97329
+    [epoch: 9/10, batch: 1001/11251]  train loss (L_tot): 2.31326   test loss (MSE): 0.97923
+    [epoch: 9/10, batch: 1501/11251]  train loss (L_tot): 2.30560   test loss (MSE): 0.98232
+    [epoch: 9/10, batch: 2001/11251]  train loss (L_tot): 2.31766   test loss (MSE): 0.99705
+    [epoch: 9/10, batch: 2501/11251]  train loss (L_tot): 2.32697   test loss (MSE): 0.99598
+    [epoch: 9/10, batch: 3001/11251]  train loss (L_tot): 2.34584   test loss (MSE): 1.01122
+    [epoch: 9/10, batch: 3501/11251]  train loss (L_tot): 2.36264   test loss (MSE): 1.02265
+    [epoch: 9/10, batch: 4001/11251]  train loss (L_tot): 2.36226   test loss (MSE): 1.02463
+    [epoch: 9/10, batch: 4501/11251]  train loss (L_tot): 2.39131   test loss (MSE): 1.01987
+    [epoch: 9/10, batch: 5001/11251]  train loss (L_tot): 2.41945   test loss (MSE): 1.04064
+    [epoch: 9/10, batch: 5501/11251]  train loss (L_tot): 2.43730   test loss (MSE): 1.04142
+    [epoch: 9/10, batch: 6001/11251]  train loss (L_tot): 2.46386   test loss (MSE): 1.06320
+    [epoch: 9/10, batch: 6501/11251]  train loss (L_tot): 2.50872   test loss (MSE): 1.09829
+    [epoch: 9/10, batch: 7001/11251]  train loss (L_tot): 532.14074   test loss (MSE): 1.06744
+    [epoch: 9/10, batch: 7501/11251]  train loss (L_tot): 2.61869   test loss (MSE): 1.01610
+    [epoch: 9/10, batch: 8001/11251]  train loss (L_tot): 2.51603   test loss (MSE): 0.99589
+    [epoch: 9/10, batch: 8501/11251]  train loss (L_tot): 2.42853   test loss (MSE): 0.98506
+    [epoch: 9/10, batch: 9001/11251]  train loss (L_tot): 2.38940   test loss (MSE): 0.97719
+    [epoch: 9/10, batch: 9501/11251]  train loss (L_tot): 2.36501   test loss (MSE): 0.97370
+    [epoch: 9/10, batch: 10001/11251]  train loss (L_tot): 2.35342   test loss (MSE): 0.97518
+    [epoch: 9/10, batch: 10501/11251]  train loss (L_tot): 2.31918   test loss (MSE): 0.97308
+    [epoch: 9/10, batch: 11001/11251]  train loss (L_tot): 2.32187   test loss (MSE): 0.97241
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    2 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label): (3, 1.0909336)  (3, 1.1536736)
+
+
+    📝 (End of 9th epoch) Total validation loss of DiffNets: 2.3941
+        Reconstruction loss: 1.7225
+            L1 norm: 0.6686
+            MSE: 1.0539
+        Classification error: 0.6604
+        Correlation penalty: 0.0112
+
+    🤯 Going through the 10th epoch ...
+    [epoch: 10/10, batch: 1/11251]  train loss (L_tot): 2.22155   test loss (MSE): 0.97884
+    [epoch: 10/10, batch: 501/11251]  train loss (L_tot): 2.31137   test loss (MSE): 0.97877
+    [epoch: 10/10, batch: 1001/11251]  train loss (L_tot): 2.32577   test loss (MSE): 0.97708
+    [epoch: 10/10, batch: 1501/11251]  train loss (L_tot): 2.30855   test loss (MSE): 0.99230
+    [epoch: 10/10, batch: 2001/11251]  train loss (L_tot): 2.33615   test loss (MSE): 1.00238
+    [epoch: 10/10, batch: 2501/11251]  train loss (L_tot): 2.34995   test loss (MSE): 1.00725
+    [epoch: 10/10, batch: 3001/11251]  train loss (L_tot): 2.35451   test loss (MSE): 1.02775
+    [epoch: 10/10, batch: 3501/11251]  train loss (L_tot): 2.37903   test loss (MSE): 1.02758
+    [epoch: 10/10, batch: 4001/11251]  train loss (L_tot): 2.40923   test loss (MSE): 1.04025
+    [epoch: 10/10, batch: 4501/11251]  train loss (L_tot): 2.42834   test loss (MSE): 1.03144
+    [epoch: 10/10, batch: 5001/11251]  train loss (L_tot): 2.44649   test loss (MSE): 1.04573
+    [epoch: 10/10, batch: 5501/11251]  train loss (L_tot): 2.46930   test loss (MSE): 1.10763
+    [epoch: 10/10, batch: 6001/11251]  train loss (L_tot): 612.69083   test loss (MSE): 1.11613
+    [epoch: 10/10, batch: 6501/11251]  train loss (L_tot): 2.80655   test loss (MSE): 1.04543
+    [epoch: 10/10, batch: 7001/11251]  train loss (L_tot): 2.56761   test loss (MSE): 1.01879
+    [epoch: 10/10, batch: 7501/11251]  train loss (L_tot): 2.42097   test loss (MSE): 1.00121
+    [epoch: 10/10, batch: 8001/11251]  train loss (L_tot): 2.36567   test loss (MSE): 0.98750
+    [epoch: 10/10, batch: 8501/11251]  train loss (L_tot): 2.34373   test loss (MSE): 0.98032
+    [epoch: 10/10, batch: 9001/11251]  train loss (L_tot): 2.31991   test loss (MSE): 0.97665
+    [epoch: 10/10, batch: 9501/11251]  train loss (L_tot): 2.32719   test loss (MSE): 0.97310
+    [epoch: 10/10, batch: 10001/11251]  train loss (L_tot): 2.30576   test loss (MSE): 0.97391
+    [epoch: 10/10, batch: 10501/11251]  train loss (L_tot): 2.30274   test loss (MSE): 0.97755
+    [epoch: 10/10, batch: 11001/11251]  train loss (L_tot): 2.31359   test loss (MSE): 0.97698
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    4 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label):
+	(2, 1.1444657)  (1, 1.1936057)  (1, 1.3764828)  (2, 1.0964692)
+
+
+    📝 (End of 10th epoch) Total validation loss of DiffNets: 2.6766
+        Reconstruction loss: 1.7093
+            L1 norm: 0.6757
+            MSE: 1.0336
+        Classification error: 0.5779
+        Correlation penalty: 0.3895
+    Building the encoders ...
+        Input dimension of layer 1 in Encoder A: 45
+        Output dimension of layer 1 in Encoder A: 12
+        Input dimension of layer 1 in Encoder B: 555
+        Output dimension of layer 1 in Encoder B: 138
+        Input dimension of layer 2 in Encoder A: 12
+        Output dimension of layer 2 in Encoder A: 4
+        Input dimension of layer 2 in Encoder B: 138
+        Output dimension of layer 2 in Encoder B: 46
+
+    Building the decoder ...
+
+Now training the 2nd out of the 2 hidden layers ...
+
+    🤯 Going through the 1st epoch ...
+    [epoch: 1/10, batch: 1/11251]  train loss (L_tot): 2.90255   test loss (MSE): 1.29340
+    [epoch: 1/10, batch: 501/11251]  train loss (L_tot): 2.69812   test loss (MSE): 1.14853
+    [epoch: 1/10, batch: 1001/11251]  train loss (L_tot): 2.54194   test loss (MSE): 1.11557
+    [epoch: 1/10, batch: 1501/11251]  train loss (L_tot): 2.51259   test loss (MSE): 1.09815
+    [epoch: 1/10, batch: 2001/11251]  train loss (L_tot): 2.46154   test loss (MSE): 1.08667
+    [epoch: 1/10, batch: 2501/11251]  train loss (L_tot): 2.44569   test loss (MSE): 1.07565
+    [epoch: 1/10, batch: 3001/11251]  train loss (L_tot): 2.42116   test loss (MSE): 1.06867
+    [epoch: 1/10, batch: 3501/11251]  train loss (L_tot): 2.40467   test loss (MSE): 1.06167
+    [epoch: 1/10, batch: 4001/11251]  train loss (L_tot): 2.40481   test loss (MSE): 1.05504
+    [epoch: 1/10, batch: 4501/11251]  train loss (L_tot): 2.38134   test loss (MSE): 1.05109
+    [epoch: 1/10, batch: 5001/11251]  train loss (L_tot): 2.38536   test loss (MSE): 1.04648
+    [epoch: 1/10, batch: 5501/11251]  train loss (L_tot): 2.39319   test loss (MSE): 1.04112
+    [epoch: 1/10, batch: 6001/11251]  train loss (L_tot): 2.37849   test loss (MSE): 1.03757
+    [epoch: 1/10, batch: 6501/11251]  train loss (L_tot): 2.36215   test loss (MSE): 1.03299
+    [epoch: 1/10, batch: 7001/11251]  train loss (L_tot): 2.37328   test loss (MSE): 1.03053
+    [epoch: 1/10, batch: 7501/11251]  train loss (L_tot): 2.35489   test loss (MSE): 1.02699
+    [epoch: 1/10, batch: 8001/11251]  train loss (L_tot): 2.33611   test loss (MSE): 1.02482
+    [epoch: 1/10, batch: 8501/11251]  train loss (L_tot): 2.34727   test loss (MSE): 1.02225
+    [epoch: 1/10, batch: 9001/11251]  train loss (L_tot): 2.34955   test loss (MSE): 1.02022
+    [epoch: 1/10, batch: 9501/11251]  train loss (L_tot): 2.34268   test loss (MSE): 1.01850
+    [epoch: 1/10, batch: 10001/11251]  train loss (L_tot): 2.33683   test loss (MSE): 1.01485
+    [epoch: 1/10, batch: 10501/11251]  train loss (L_tot): 2.33102   test loss (MSE): 1.01240
+    [epoch: 1/10, batch: 11001/11251]  train loss (L_tot): 2.32659   test loss (MSE): 1.01046
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    2 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label): (1, 1.3025829)  (1, 1.4591520)
+
+
+    📝 (End of 1st epoch) Total validation loss of DiffNets: 2.5454
+        Reconstruction loss: 1.9432
+            L1 norm: 0.7705
+            MSE: 1.1727
+        Classification error: 0.5800
+        Correlation penalty: 0.0223
+
+    🤯 Going through the 2nd epoch ...
+    [epoch: 2/10, batch: 1/11251]  train loss (L_tot): 2.08164   test loss (MSE): 1.01003
+    [epoch: 2/10, batch: 501/11251]  train loss (L_tot): 2.33605   test loss (MSE): 1.00831
+    [epoch: 2/10, batch: 1001/11251]  train loss (L_tot): 2.31823   test loss (MSE): 1.00568
+    [epoch: 2/10, batch: 1501/11251]  train loss (L_tot): 2.32347   test loss (MSE): 1.00534
+    [epoch: 2/10, batch: 2001/11251]  train loss (L_tot): 2.31304   test loss (MSE): 1.00379
+    [epoch: 2/10, batch: 2501/11251]  train loss (L_tot): 2.30132   test loss (MSE): 1.00117
+    [epoch: 2/10, batch: 3001/11251]  train loss (L_tot): 2.31630   test loss (MSE): 0.99938
+    [epoch: 2/10, batch: 3501/11251]  train loss (L_tot): 2.32476   test loss (MSE): 0.99859
+    [epoch: 2/10, batch: 4001/11251]  train loss (L_tot): 2.31172   test loss (MSE): 0.99855
+    [epoch: 2/10, batch: 4501/11251]  train loss (L_tot): 2.31136   test loss (MSE): 0.99600
+    [epoch: 2/10, batch: 5001/11251]  train loss (L_tot): 2.30491   test loss (MSE): 0.99608
+    [epoch: 2/10, batch: 5501/11251]  train loss (L_tot): 2.29874   test loss (MSE): 0.99281
+    [epoch: 2/10, batch: 6001/11251]  train loss (L_tot): 2.30414   test loss (MSE): 0.99184
+    [epoch: 2/10, batch: 6501/11251]  train loss (L_tot): 2.30134   test loss (MSE): 0.99061
+    [epoch: 2/10, batch: 7001/11251]  train loss (L_tot): 2.29851   test loss (MSE): 0.98969
+    [epoch: 2/10, batch: 7501/11251]  train loss (L_tot): 2.31022   test loss (MSE): 0.98788
+    [epoch: 2/10, batch: 8001/11251]  train loss (L_tot): 2.29079   test loss (MSE): 0.98743
+    [epoch: 2/10, batch: 8501/11251]  train loss (L_tot): 2.29086   test loss (MSE): 0.98613
+    [epoch: 2/10, batch: 9001/11251]  train loss (L_tot): 2.28816   test loss (MSE): 0.98479
+    [epoch: 2/10, batch: 9501/11251]  train loss (L_tot): 2.30177   test loss (MSE): 0.98399
+    [epoch: 2/10, batch: 10001/11251]  train loss (L_tot): 2.28035   test loss (MSE): 0.98347
+    [epoch: 2/10, batch: 10501/11251]  train loss (L_tot): 2.29117   test loss (MSE): 0.98193
+    [epoch: 2/10, batch: 11001/11251]  train loss (L_tot): 2.29273   test loss (MSE): 0.98092
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    4 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label):
+	(0, 1.1033229)  (1, 1.5534368)  (2, 1.5927917)  (2, 1.7520473)
+
+
+    📝 (End of 2nd epoch) Total validation loss of DiffNets: 2.5945
+        Reconstruction loss: 1.9415
+            L1 norm: 0.7821
+            MSE: 1.1594
+        Classification error: 0.6522
+        Correlation penalty: 0.0008
+
+    🤯 Going through the 3rd epoch ...
+    [epoch: 3/10, batch: 1/11251]  train loss (L_tot): 2.01542   test loss (MSE): 0.98071
+    [epoch: 3/10, batch: 501/11251]  train loss (L_tot): 2.29105   test loss (MSE): 0.98000
+    [epoch: 3/10, batch: 1001/11251]  train loss (L_tot): 2.28702   test loss (MSE): 0.97903
+    [epoch: 3/10, batch: 1501/11251]  train loss (L_tot): 2.29140   test loss (MSE): 0.97938
+    [epoch: 3/10, batch: 2001/11251]  train loss (L_tot): 2.28091   test loss (MSE): 0.97763
+    [epoch: 3/10, batch: 2501/11251]  train loss (L_tot): 2.27638   test loss (MSE): 0.97670
+    [epoch: 3/10, batch: 3001/11251]  train loss (L_tot): 2.27549   test loss (MSE): 0.97567
+    [epoch: 3/10, batch: 3501/11251]  train loss (L_tot): 2.27403   test loss (MSE): 0.97469
+    [epoch: 3/10, batch: 4001/11251]  train loss (L_tot): 2.27359   test loss (MSE): 0.97421
+    [epoch: 3/10, batch: 4501/11251]  train loss (L_tot): 2.26753   test loss (MSE): 0.97331
+    [epoch: 3/10, batch: 5001/11251]  train loss (L_tot): 2.28182   test loss (MSE): 0.97265
+    [epoch: 3/10, batch: 5501/11251]  train loss (L_tot): 2.27162   test loss (MSE): 0.97299
+    [epoch: 3/10, batch: 6001/11251]  train loss (L_tot): 2.28166   test loss (MSE): 0.97171
+    [epoch: 3/10, batch: 6501/11251]  train loss (L_tot): 2.27267   test loss (MSE): 0.97086
+    [epoch: 3/10, batch: 7001/11251]  train loss (L_tot): 2.27459   test loss (MSE): 0.96964
+    [epoch: 3/10, batch: 7501/11251]  train loss (L_tot): 2.26637   test loss (MSE): 0.96964
+    [epoch: 3/10, batch: 8001/11251]  train loss (L_tot): 2.26594   test loss (MSE): 0.96904
+    [epoch: 3/10, batch: 8501/11251]  train loss (L_tot): 2.27434   test loss (MSE): 0.96918
+    [epoch: 3/10, batch: 9001/11251]  train loss (L_tot): 2.25569   test loss (MSE): 0.96829
+    [epoch: 3/10, batch: 9501/11251]  train loss (L_tot): 2.25802   test loss (MSE): 0.96683
+    [epoch: 3/10, batch: 10001/11251]  train loss (L_tot): 2.25555   test loss (MSE): 0.96598
+    [epoch: 3/10, batch: 10501/11251]  train loss (L_tot): 2.25520   test loss (MSE): 0.96599
+    [epoch: 3/10, batch: 11001/11251]  train loss (L_tot): 2.24490   test loss (MSE): 0.96497
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    4 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label):
+	(2, 1.0300119)  (2, 1.1961858)  (1, 1.8856307)  (3, 1.5708907)
+
+
+    📝 (End of 3rd epoch) Total validation loss of DiffNets: 2.2768
+        Reconstruction loss: 1.5944
+            L1 norm: 0.6370
+            MSE: 0.9574
+        Classification error: 0.6736
+        Correlation penalty: 0.0088
+
+    🤯 Going through the 4th epoch ...
+    [epoch: 4/10, batch: 1/11251]  train loss (L_tot): 2.25205   test loss (MSE): 0.96467
+    [epoch: 4/10, batch: 501/11251]  train loss (L_tot): 2.24892   test loss (MSE): 0.96383
+    [epoch: 4/10, batch: 1001/11251]  train loss (L_tot): 2.25834   test loss (MSE): 0.96359
+    [epoch: 4/10, batch: 1501/11251]  train loss (L_tot): 2.25307   test loss (MSE): 0.96291
+    [epoch: 4/10, batch: 2001/11251]  train loss (L_tot): 2.25510   test loss (MSE): 0.96317
+    [epoch: 4/10, batch: 2501/11251]  train loss (L_tot): 2.24701   test loss (MSE): 0.96242
+    [epoch: 4/10, batch: 3001/11251]  train loss (L_tot): 2.25139   test loss (MSE): 0.96142
+    [epoch: 4/10, batch: 3501/11251]  train loss (L_tot): 2.24704   test loss (MSE): 0.96127
+    [epoch: 4/10, batch: 4001/11251]  train loss (L_tot): 2.25414   test loss (MSE): 0.96053
+    [epoch: 4/10, batch: 4501/11251]  train loss (L_tot): 2.26206   test loss (MSE): 0.96001
+    [epoch: 4/10, batch: 5001/11251]  train loss (L_tot): 2.24818   test loss (MSE): 0.95964
+    [epoch: 4/10, batch: 5501/11251]  train loss (L_tot): 2.26137   test loss (MSE): 0.95916
+    [epoch: 4/10, batch: 6001/11251]  train loss (L_tot): 2.25875   test loss (MSE): 0.95846
+    [epoch: 4/10, batch: 6501/11251]  train loss (L_tot): 2.26103   test loss (MSE): 0.95886
+    [epoch: 4/10, batch: 7001/11251]  train loss (L_tot): 2.24497   test loss (MSE): 0.95797
+    [epoch: 4/10, batch: 7501/11251]  train loss (L_tot): 2.24544   test loss (MSE): 0.95743
+    [epoch: 4/10, batch: 8001/11251]  train loss (L_tot): 2.24841   test loss (MSE): 0.95646
+    [epoch: 4/10, batch: 8501/11251]  train loss (L_tot): 2.24874   test loss (MSE): 0.95647
+    [epoch: 4/10, batch: 9001/11251]  train loss (L_tot): 2.24015   test loss (MSE): 0.95587
+    [epoch: 4/10, batch: 9501/11251]  train loss (L_tot): 2.25097   test loss (MSE): 0.95551
+    [epoch: 4/10, batch: 10001/11251]  train loss (L_tot): 2.24630   test loss (MSE): 0.95416
+    [epoch: 4/10, batch: 10501/11251]  train loss (L_tot): 2.25180   test loss (MSE): 0.95510
+    [epoch: 4/10, batch: 11001/11251]  train loss (L_tot): 2.25094   test loss (MSE): 0.95404
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    1 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label): (1, 1.7926704)
+
+
+    📝 (End of 4th epoch) Total validation loss of DiffNets: 1.2801
+        Reconstruction loss: 0.6051
+            L1 norm: 0.2674
+            MSE: 0.3377
+        Classification error: 0.6744
+        Correlation penalty: 0.0007
+
+    🤯 Going through the 5th epoch ...
+    [epoch: 5/10, batch: 1/11251]  train loss (L_tot): 2.33793   test loss (MSE): 0.95409
+    [epoch: 5/10, batch: 501/11251]  train loss (L_tot): 2.24616   test loss (MSE): 0.95387
+    [epoch: 5/10, batch: 1001/11251]  train loss (L_tot): 2.24092   test loss (MSE): 0.95298
+    [epoch: 5/10, batch: 1501/11251]  train loss (L_tot): 2.23150   test loss (MSE): 0.95271
+    [epoch: 5/10, batch: 2001/11251]  train loss (L_tot): 2.22862   test loss (MSE): 0.95211
+    [epoch: 5/10, batch: 2501/11251]  train loss (L_tot): 2.22286   test loss (MSE): 0.95219
+    [epoch: 5/10, batch: 3001/11251]  train loss (L_tot): 2.24960   test loss (MSE): 0.95187
+    [epoch: 5/10, batch: 3501/11251]  train loss (L_tot): 2.23084   test loss (MSE): 0.95149
+    [epoch: 5/10, batch: 4001/11251]  train loss (L_tot): 2.23642   test loss (MSE): 0.95140
+    [epoch: 5/10, batch: 4501/11251]  train loss (L_tot): 2.24505   test loss (MSE): 0.95095
+    [epoch: 5/10, batch: 5001/11251]  train loss (L_tot): 2.23398   test loss (MSE): 0.95003
+    [epoch: 5/10, batch: 5501/11251]  train loss (L_tot): 2.25383   test loss (MSE): 0.94949
+    [epoch: 5/10, batch: 6001/11251]  train loss (L_tot): 2.24398   test loss (MSE): 0.94936
+    [epoch: 5/10, batch: 6501/11251]  train loss (L_tot): 2.23906   test loss (MSE): 0.94965
+    [epoch: 5/10, batch: 7001/11251]  train loss (L_tot): 2.23972   test loss (MSE): 0.94922
+    [epoch: 5/10, batch: 7501/11251]  train loss (L_tot): 2.23162   test loss (MSE): 0.94842
+    [epoch: 5/10, batch: 8001/11251]  train loss (L_tot): 2.23548   test loss (MSE): 0.94795
+    [epoch: 5/10, batch: 8501/11251]  train loss (L_tot): 2.21898   test loss (MSE): 0.94788
+    [epoch: 5/10, batch: 9001/11251]  train loss (L_tot): 2.23062   test loss (MSE): 0.94768
+    [epoch: 5/10, batch: 9501/11251]  train loss (L_tot): 2.23665   test loss (MSE): 0.94701
+    [epoch: 5/10, batch: 10001/11251]  train loss (L_tot): 2.23106   test loss (MSE): 0.94693
+    [epoch: 5/10, batch: 10501/11251]  train loss (L_tot): 2.24066   test loss (MSE): 0.94682
+    [epoch: 5/10, batch: 11001/11251]  train loss (L_tot): 2.22818   test loss (MSE): 0.94615
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    1 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label): (1, 1.1524390)
+
+
+    📝 (End of 5th epoch) Total validation loss of DiffNets: 2.4618
+        Reconstruction loss: 1.7502
+            L1 norm: 0.7234
+            MSE: 1.0269
+        Classification error: 0.6899
+        Correlation penalty: 0.0217
+
+    🤯 Going through the 6th epoch ...
+    [epoch: 6/10, batch: 1/11251]  train loss (L_tot): 2.21306   test loss (MSE): 0.94559
+    [epoch: 6/10, batch: 501/11251]  train loss (L_tot): 2.24399   test loss (MSE): 0.94592
+    [epoch: 6/10, batch: 1001/11251]  train loss (L_tot): 2.22012   test loss (MSE): 0.94516
+    [epoch: 6/10, batch: 1501/11251]  train loss (L_tot): 2.23453   test loss (MSE): 0.94453
+    [epoch: 6/10, batch: 2001/11251]  train loss (L_tot): 2.22504   test loss (MSE): 0.94532
+    [epoch: 6/10, batch: 2501/11251]  train loss (L_tot): 2.22776   test loss (MSE): 0.94501
+    [epoch: 6/10, batch: 3001/11251]  train loss (L_tot): 2.23328   test loss (MSE): 0.94380
+    [epoch: 6/10, batch: 3501/11251]  train loss (L_tot): 2.22362   test loss (MSE): 0.94406
+    [epoch: 6/10, batch: 4001/11251]  train loss (L_tot): 2.22574   test loss (MSE): 0.94323
+    [epoch: 6/10, batch: 4501/11251]  train loss (L_tot): 2.23164   test loss (MSE): 0.94334
+    [epoch: 6/10, batch: 5001/11251]  train loss (L_tot): 2.22570   test loss (MSE): 0.94336
+    [epoch: 6/10, batch: 5501/11251]  train loss (L_tot): 2.21651   test loss (MSE): 0.94278
+    [epoch: 6/10, batch: 6001/11251]  train loss (L_tot): 2.23269   test loss (MSE): 0.94215
+    [epoch: 6/10, batch: 6501/11251]  train loss (L_tot): 2.22738   test loss (MSE): 0.94234
+    [epoch: 6/10, batch: 7001/11251]  train loss (L_tot): 2.22675   test loss (MSE): 0.94164
+    [epoch: 6/10, batch: 7501/11251]  train loss (L_tot): 2.21216   test loss (MSE): 0.94173
+    [epoch: 6/10, batch: 8001/11251]  train loss (L_tot): 2.22480   test loss (MSE): 0.94163
+    [epoch: 6/10, batch: 8501/11251]  train loss (L_tot): 2.22667   test loss (MSE): 0.94205
+    [epoch: 6/10, batch: 9001/11251]  train loss (L_tot): 2.22082   test loss (MSE): 0.94073
+    [epoch: 6/10, batch: 9501/11251]  train loss (L_tot): 2.22882   test loss (MSE): 0.94004
+    [epoch: 6/10, batch: 10001/11251]  train loss (L_tot): 2.22468   test loss (MSE): 0.94050
+    [epoch: 6/10, batch: 10501/11251]  train loss (L_tot): 2.20763   test loss (MSE): 0.94008
+    [epoch: 6/10, batch: 11001/11251]  train loss (L_tot): 2.21076   test loss (MSE): 0.94014
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    1 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label): (3, 2.2934906)
+
+
+    📝 (End of 6th epoch) Total validation loss of DiffNets: 2.1253
+        Reconstruction loss: 1.4602
+            L1 norm: 0.5933
+            MSE: 0.8668
+        Classification error: 0.6531
+        Correlation penalty: 0.0120
+
+    🤯 Going through the 7th epoch ...
+    [epoch: 7/10, batch: 1/11251]  train loss (L_tot): 2.02685   test loss (MSE): 0.93954
+    [epoch: 7/10, batch: 501/11251]  train loss (L_tot): 2.22043   test loss (MSE): 0.93926
+    [epoch: 7/10, batch: 1001/11251]  train loss (L_tot): 2.21353   test loss (MSE): 0.93966
+    [epoch: 7/10, batch: 1501/11251]  train loss (L_tot): 2.20909   test loss (MSE): 0.93862
+    [epoch: 7/10, batch: 2001/11251]  train loss (L_tot): 2.21016   test loss (MSE): 0.93854
+    [epoch: 7/10, batch: 2501/11251]  train loss (L_tot): 2.20529   test loss (MSE): 0.93993
+    [epoch: 7/10, batch: 3001/11251]  train loss (L_tot): 2.22024   test loss (MSE): 0.93782
+    [epoch: 7/10, batch: 3501/11251]  train loss (L_tot): 2.21657   test loss (MSE): 0.93855
+    [epoch: 7/10, batch: 4001/11251]  train loss (L_tot): 2.21769   test loss (MSE): 0.93820
+    [epoch: 7/10, batch: 4501/11251]  train loss (L_tot): 2.22125   test loss (MSE): 0.93786
+    [epoch: 7/10, batch: 5001/11251]  train loss (L_tot): 2.21285   test loss (MSE): 0.93702
+    [epoch: 7/10, batch: 5501/11251]  train loss (L_tot): 2.22161   test loss (MSE): 0.93686
+    [epoch: 7/10, batch: 6001/11251]  train loss (L_tot): 2.22037   test loss (MSE): 0.93729
+    [epoch: 7/10, batch: 6501/11251]  train loss (L_tot): 2.21789   test loss (MSE): 0.93700
+    [epoch: 7/10, batch: 7001/11251]  train loss (L_tot): 2.22837   test loss (MSE): 0.93649
+    [epoch: 7/10, batch: 7501/11251]  train loss (L_tot): 2.21875   test loss (MSE): 0.93656
+    [epoch: 7/10, batch: 8001/11251]  train loss (L_tot): 2.22443   test loss (MSE): 0.93584
+    [epoch: 7/10, batch: 8501/11251]  train loss (L_tot): 2.21707   test loss (MSE): 0.93602
+    [epoch: 7/10, batch: 9001/11251]  train loss (L_tot): 2.21713   test loss (MSE): 0.93643
+    [epoch: 7/10, batch: 9501/11251]  train loss (L_tot): 2.22283   test loss (MSE): 0.93593
+    [epoch: 7/10, batch: 10001/11251]  train loss (L_tot): 2.20498   test loss (MSE): 0.93566
+    [epoch: 7/10, batch: 10501/11251]  train loss (L_tot): 2.19552   test loss (MSE): 0.93584
+    [epoch: 7/10, batch: 11001/11251]  train loss (L_tot): 2.19940   test loss (MSE): 0.93520
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    1 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label): (3, 1.0768875)
+
+
+    📝 (End of 7th epoch) Total validation loss of DiffNets: 2.0926
+        Reconstruction loss: 1.4340
+            L1 norm: 0.5811
+            MSE: 0.8529
+        Classification error: 0.6415
+        Correlation penalty: 0.0172
+
+    🤯 Going through the 8th epoch ...
+    [epoch: 8/10, batch: 1/11251]  train loss (L_tot): 2.39025   test loss (MSE): 0.93481
+    [epoch: 8/10, batch: 501/11251]  train loss (L_tot): 2.21169   test loss (MSE): 0.93431
+    [epoch: 8/10, batch: 1001/11251]  train loss (L_tot): 2.19208   test loss (MSE): 0.93522
+    [epoch: 8/10, batch: 1501/11251]  train loss (L_tot): 2.20873   test loss (MSE): 0.93412
+    [epoch: 8/10, batch: 2001/11251]  train loss (L_tot): 2.20685   test loss (MSE): 0.93397
+    [epoch: 8/10, batch: 2501/11251]  train loss (L_tot): 2.21574   test loss (MSE): 0.93353
+    [epoch: 8/10, batch: 3001/11251]  train loss (L_tot): 2.22374   test loss (MSE): 0.93349
+    [epoch: 8/10, batch: 3501/11251]  train loss (L_tot): 2.20797   test loss (MSE): 0.93303
+    [epoch: 8/10, batch: 4001/11251]  train loss (L_tot): 2.19383   test loss (MSE): 0.93341
+    [epoch: 8/10, batch: 4501/11251]  train loss (L_tot): 2.20558   test loss (MSE): 0.93268
+    [epoch: 8/10, batch: 5001/11251]  train loss (L_tot): 2.21100   test loss (MSE): 0.93302
+    [epoch: 8/10, batch: 5501/11251]  train loss (L_tot): 2.20576   test loss (MSE): 0.93306
+    [epoch: 8/10, batch: 6001/11251]  train loss (L_tot): 2.20733   test loss (MSE): 0.93276
+    [epoch: 8/10, batch: 6501/11251]  train loss (L_tot): 2.20513   test loss (MSE): 0.93293
+    [epoch: 8/10, batch: 7001/11251]  train loss (L_tot): 2.20810   test loss (MSE): 0.93192
+    [epoch: 8/10, batch: 7501/11251]  train loss (L_tot): 2.20175   test loss (MSE): 0.93310
+    [epoch: 8/10, batch: 8001/11251]  train loss (L_tot): 2.19975   test loss (MSE): 0.93148
+    [epoch: 8/10, batch: 8501/11251]  train loss (L_tot): 2.22076   test loss (MSE): 0.93195
+    [epoch: 8/10, batch: 9001/11251]  train loss (L_tot): 2.19883   test loss (MSE): 0.93244
+    [epoch: 8/10, batch: 9501/11251]  train loss (L_tot): 2.21305   test loss (MSE): 0.93131
+    [epoch: 8/10, batch: 10001/11251]  train loss (L_tot): 2.20352   test loss (MSE): 0.93113
+    [epoch: 8/10, batch: 10501/11251]  train loss (L_tot): 2.21317   test loss (MSE): 0.93030
+    [epoch: 8/10, batch: 11001/11251]  train loss (L_tot): 2.19373   test loss (MSE): 0.93087
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    2 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label): (3, 1.1849743)  (1, 1.7588710)
+
+
+    📝 (End of 8th epoch) Total validation loss of DiffNets: 1.9063
+        Reconstruction loss: 1.2166
+            L1 norm: 0.5280
+            MSE: 0.6885
+        Classification error: 0.6452
+        Correlation penalty: 0.0445
+
+    🤯 Going through the 9th epoch ...
+    [epoch: 9/10, batch: 1/11251]  train loss (L_tot): 2.28279   test loss (MSE): 0.93051
+    [epoch: 9/10, batch: 501/11251]  train loss (L_tot): 2.19992   test loss (MSE): 0.93135
+    [epoch: 9/10, batch: 1001/11251]  train loss (L_tot): 2.19533   test loss (MSE): 0.93024
+    [epoch: 9/10, batch: 1501/11251]  train loss (L_tot): 2.21527   test loss (MSE): 0.93047
+    [epoch: 9/10, batch: 2001/11251]  train loss (L_tot): 2.20703   test loss (MSE): 0.93050
+    [epoch: 9/10, batch: 2501/11251]  train loss (L_tot): 2.18937   test loss (MSE): 0.92951
+    [epoch: 9/10, batch: 3001/11251]  train loss (L_tot): 2.20988   test loss (MSE): 0.92979
+    [epoch: 9/10, batch: 3501/11251]  train loss (L_tot): 2.20199   test loss (MSE): 0.92932
+    [epoch: 9/10, batch: 4001/11251]  train loss (L_tot): 2.20434   test loss (MSE): 0.92987
+    [epoch: 9/10, batch: 4501/11251]  train loss (L_tot): 2.21374   test loss (MSE): 0.92927
+    [epoch: 9/10, batch: 5001/11251]  train loss (L_tot): 2.20196   test loss (MSE): 0.92917
+    [epoch: 9/10, batch: 5501/11251]  train loss (L_tot): 2.20424   test loss (MSE): 0.92912
+    [epoch: 9/10, batch: 6001/11251]  train loss (L_tot): 2.20235   test loss (MSE): 0.92893
+    [epoch: 9/10, batch: 6501/11251]  train loss (L_tot): 2.20202   test loss (MSE): 0.92843
+    [epoch: 9/10, batch: 7001/11251]  train loss (L_tot): 2.19420   test loss (MSE): 0.92844
+    [epoch: 9/10, batch: 7501/11251]  train loss (L_tot): 2.20015   test loss (MSE): 0.92845
+    [epoch: 9/10, batch: 8001/11251]  train loss (L_tot): 2.20456   test loss (MSE): 0.92775
+    [epoch: 9/10, batch: 8501/11251]  train loss (L_tot): 2.19767   test loss (MSE): 0.92803
+    [epoch: 9/10, batch: 9001/11251]  train loss (L_tot): 2.19813   test loss (MSE): 0.92777
+    [epoch: 9/10, batch: 9501/11251]  train loss (L_tot): 2.20118   test loss (MSE): 0.92692
+    [epoch: 9/10, batch: 10001/11251]  train loss (L_tot): 2.19656   test loss (MSE): 0.92752
+    [epoch: 9/10, batch: 10501/11251]  train loss (L_tot): 2.18814   test loss (MSE): 0.92737
+    [epoch: 9/10, batch: 11001/11251]  train loss (L_tot): 2.19368   test loss (MSE): 0.92684
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    4 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label):
+	(0, 1.6215867)  (1, 1.5385373)  (3, 1.1358380)  (3, 1.1988944)
+
+
+    📝 (End of 9th epoch) Total validation loss of DiffNets: 2.0342
+        Reconstruction loss: 1.3794
+            L1 norm: 0.5847
+            MSE: 0.7947
+        Classification error: 0.6514
+        Correlation penalty: 0.0034
+
+    🤯 Going through the 10th epoch ...
+    [epoch: 10/10, batch: 1/11251]  train loss (L_tot): 2.13639   test loss (MSE): 0.92687
+    [epoch: 10/10, batch: 501/11251]  train loss (L_tot): 2.19493   test loss (MSE): 0.92662
+    [epoch: 10/10, batch: 1001/11251]  train loss (L_tot): 2.19863   test loss (MSE): 0.92702
+    [epoch: 10/10, batch: 1501/11251]  train loss (L_tot): 2.18293   test loss (MSE): 0.92636
+    [epoch: 10/10, batch: 2001/11251]  train loss (L_tot): 2.20066   test loss (MSE): 0.92653
+    [epoch: 10/10, batch: 2501/11251]  train loss (L_tot): 2.20051   test loss (MSE): 0.92627
+    [epoch: 10/10, batch: 3001/11251]  train loss (L_tot): 2.20772   test loss (MSE): 0.92641
+    [epoch: 10/10, batch: 3501/11251]  train loss (L_tot): 2.20104   test loss (MSE): 0.92567
+    [epoch: 10/10, batch: 4001/11251]  train loss (L_tot): 2.19597   test loss (MSE): 0.92695
+    [epoch: 10/10, batch: 4501/11251]  train loss (L_tot): 2.18799   test loss (MSE): 0.92632
+    [epoch: 10/10, batch: 5001/11251]  train loss (L_tot): 2.18811   test loss (MSE): 0.92559
+    [epoch: 10/10, batch: 5501/11251]  train loss (L_tot): 2.20245   test loss (MSE): 0.92612
+    [epoch: 10/10, batch: 6001/11251]  train loss (L_tot): 2.20748   test loss (MSE): 0.92538
+    [epoch: 10/10, batch: 6501/11251]  train loss (L_tot): 2.18546   test loss (MSE): 0.92508
+    [epoch: 10/10, batch: 7001/11251]  train loss (L_tot): 2.19648   test loss (MSE): 0.92489
+    [epoch: 10/10, batch: 7501/11251]  train loss (L_tot): 2.18881   test loss (MSE): 0.92512
+    [epoch: 10/10, batch: 8001/11251]  train loss (L_tot): 2.19128   test loss (MSE): 0.92464
+    [epoch: 10/10, batch: 8501/11251]  train loss (L_tot): 2.19150   test loss (MSE): 0.92436
+    [epoch: 10/10, batch: 9001/11251]  train loss (L_tot): 2.19944   test loss (MSE): 0.92435
+    [epoch: 10/10, batch: 9501/11251]  train loss (L_tot): 2.18765   test loss (MSE): 0.92441
+    [epoch: 10/10, batch: 10001/11251]  train loss (L_tot): 2.19457   test loss (MSE): 0.92454
+    [epoch: 10/10, batch: 10501/11251]  train loss (L_tot): 2.19031   test loss (MSE): 0.92448
+    [epoch: 10/10, batch: 11001/11251]  train loss (L_tot): 2.18350   test loss (MSE): 0.92384
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    4 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label):
+	(1, 4.6308055)  (3, 1.1807971)  (0, 1.1034255)  (3, 1.3424469)
+
+
+    📝 (End of 10th epoch) Total validation loss of DiffNets: 1.7758
+        Reconstruction loss: 1.1550
+            L1 norm: 0.5042
+            MSE: 0.6508
+        Classification error: 0.6189
+        Correlation penalty: 0.0019
+
+ Now polishing the network ...
+
+    🤯 Going through the 1st epoch ...
+    [epoch: 1/10, batch: 1/11251]  train loss (L_tot): 2.20003   test loss (MSE): 1.08726
+    [epoch: 1/10, batch: 501/11251]  train loss (L_tot): 2.42147   test loss (MSE): 1.07622
+    [epoch: 1/10, batch: 1001/11251]  train loss (L_tot): 2.41431   test loss (MSE): 1.06323
+    [epoch: 1/10, batch: 1501/11251]  train loss (L_tot): 2.42794   test loss (MSE): 1.05064
+    [epoch: 1/10, batch: 2001/11251]  train loss (L_tot): 2.39711   test loss (MSE): 1.05665
+    [epoch: 1/10, batch: 2501/11251]  train loss (L_tot): 2.40539   test loss (MSE): 1.05234
+    [epoch: 1/10, batch: 3001/11251]  train loss (L_tot): 2.40181   test loss (MSE): 1.06165
+    [epoch: 1/10, batch: 3501/11251]  train loss (L_tot): 2.40092   test loss (MSE): 1.06049
+    [epoch: 1/10, batch: 4001/11251]  train loss (L_tot): 2.39834   test loss (MSE): 1.05859
+    [epoch: 1/10, batch: 4501/11251]  train loss (L_tot): 2.40705   test loss (MSE): 1.07251
+    [epoch: 1/10, batch: 5001/11251]  train loss (L_tot): 2.40860   test loss (MSE): 1.06263
+    [epoch: 1/10, batch: 5501/11251]  train loss (L_tot): 2.41947   test loss (MSE): 1.05993
+    [epoch: 1/10, batch: 6001/11251]  train loss (L_tot): 2.39892   test loss (MSE): 1.07444
+    [epoch: 1/10, batch: 6501/11251]  train loss (L_tot): 2.40392   test loss (MSE): 1.07501
+    [epoch: 1/10, batch: 7001/11251]  train loss (L_tot): 2.40072   test loss (MSE): 1.06692
+    [epoch: 1/10, batch: 7501/11251]  train loss (L_tot): 2.41676   test loss (MSE): 1.06890
+    [epoch: 1/10, batch: 8001/11251]  train loss (L_tot): 2.42026   test loss (MSE): 1.06839
+    [epoch: 1/10, batch: 8501/11251]  train loss (L_tot): 2.43026   test loss (MSE): 1.06795
+    [epoch: 1/10, batch: 9001/11251]  train loss (L_tot): 2.40982   test loss (MSE): 1.09246
+    [epoch: 1/10, batch: 9501/11251]  train loss (L_tot): 2.43359   test loss (MSE): 1.05832
+    [epoch: 1/10, batch: 10001/11251]  train loss (L_tot): 2.39885   test loss (MSE): 1.06382
+    [epoch: 1/10, batch: 10501/11251]  train loss (L_tot): 2.40996   test loss (MSE): 1.06854
+    [epoch: 1/10, batch: 11001/11251]  train loss (L_tot): 2.41193   test loss (MSE): 1.06903
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    2 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label): (1, 3.3869009)  (3, 6.8336964)
+
+
+    📝 (End of 1st epoch) Total validation loss of DiffNets: 2.4345
+        Reconstruction loss: 1.7499
+            L1 norm: 0.7236
+            MSE: 1.0263
+        Classification error: 0.6768
+        Correlation penalty: 0.0078
+
+    🤯 Going through the 2nd epoch ...
+    [epoch: 2/10, batch: 1/11251]  train loss (L_tot): 2.61691   test loss (MSE): 1.07173
+    [epoch: 2/10, batch: 501/11251]  train loss (L_tot): 2.40804   test loss (MSE): 1.08195
+    [epoch: 2/10, batch: 1001/11251]  train loss (L_tot): 2.40850   test loss (MSE): 1.06787
+    [epoch: 2/10, batch: 1501/11251]  train loss (L_tot): 2.41966   test loss (MSE): 1.06887
+    [epoch: 2/10, batch: 2001/11251]  train loss (L_tot): 2.41988   test loss (MSE): 1.07770
+    [epoch: 2/10, batch: 2501/11251]  train loss (L_tot): 2.39804   test loss (MSE): 1.08917
+    [epoch: 2/10, batch: 3001/11251]  train loss (L_tot): 2.41361   test loss (MSE): 1.06960
+    [epoch: 2/10, batch: 3501/11251]  train loss (L_tot): 2.43373   test loss (MSE): 1.07041
+    [epoch: 2/10, batch: 4001/11251]  train loss (L_tot): 2.41405   test loss (MSE): 1.06689
+    [epoch: 2/10, batch: 4501/11251]  train loss (L_tot): 2.40963   test loss (MSE): 1.08323
+    [epoch: 2/10, batch: 5001/11251]  train loss (L_tot): 2.41018   test loss (MSE): 1.07228
+    [epoch: 2/10, batch: 5501/11251]  train loss (L_tot): 2.42255   test loss (MSE): 1.08361
+    [epoch: 2/10, batch: 6001/11251]  train loss (L_tot): 2.42382   test loss (MSE): 1.07943
+    [epoch: 2/10, batch: 6501/11251]  train loss (L_tot): 2.40924   test loss (MSE): 1.06130
+    [epoch: 2/10, batch: 7001/11251]  train loss (L_tot): 2.41967   test loss (MSE): 1.06705
+    [epoch: 2/10, batch: 7501/11251]  train loss (L_tot): 2.39548   test loss (MSE): 1.08086
+    [epoch: 2/10, batch: 8001/11251]  train loss (L_tot): 2.41220   test loss (MSE): 1.07279
+    [epoch: 2/10, batch: 8501/11251]  train loss (L_tot): 2.41772   test loss (MSE): 1.07172
+    [epoch: 2/10, batch: 9001/11251]  train loss (L_tot): 2.41557   test loss (MSE): 1.06862
+    [epoch: 2/10, batch: 9501/11251]  train loss (L_tot): 2.41907   test loss (MSE): 1.07677
+    [epoch: 2/10, batch: 10001/11251]  train loss (L_tot): 2.41742   test loss (MSE): 1.07878
+    [epoch: 2/10, batch: 10501/11251]  train loss (L_tot): 2.40776   test loss (MSE): 1.06274
+    [epoch: 2/10, batch: 11001/11251]  train loss (L_tot): 2.42480   test loss (MSE): 1.07093
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    1 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label): (2, 1.0838317)
+
+
+    📝 (End of 2nd epoch) Total validation loss of DiffNets: 1.6061
+        Reconstruction loss: 0.8995
+            L1 norm: 0.3769
+            MSE: 0.5227
+        Classification error: 0.7054
+        Correlation penalty: 0.0012
+
+    🤯 Going through the 3rd epoch ...
+    [epoch: 3/10, batch: 1/11251]  train loss (L_tot): 2.43669   test loss (MSE): 1.07132
+    [epoch: 3/10, batch: 501/11251]  train loss (L_tot): 2.40880   test loss (MSE): 1.07750
+    [epoch: 3/10, batch: 1001/11251]  train loss (L_tot): 2.40888   test loss (MSE): 1.08131
+    [epoch: 3/10, batch: 1501/11251]  train loss (L_tot): 2.40196   test loss (MSE): 1.07408
+    [epoch: 3/10, batch: 2001/11251]  train loss (L_tot): 2.39722   test loss (MSE): 1.06913
+    [epoch: 3/10, batch: 2501/11251]  train loss (L_tot): 2.40595   test loss (MSE): 1.07394
+    [epoch: 3/10, batch: 3001/11251]  train loss (L_tot): 2.40863   test loss (MSE): 1.07570
+    [epoch: 3/10, batch: 3501/11251]  train loss (L_tot): 2.41812   test loss (MSE): 1.07008
+    [epoch: 3/10, batch: 4001/11251]  train loss (L_tot): 2.41272   test loss (MSE): 1.07700
+    [epoch: 3/10, batch: 4501/11251]  train loss (L_tot): 2.41436   test loss (MSE): 1.06247
+    [epoch: 3/10, batch: 5001/11251]  train loss (L_tot): 2.39235   test loss (MSE): 1.06230
+    [epoch: 3/10, batch: 5501/11251]  train loss (L_tot): 2.38396   test loss (MSE): 1.06189
+    [epoch: 3/10, batch: 6001/11251]  train loss (L_tot): 2.40124   test loss (MSE): 1.07690
+    [epoch: 3/10, batch: 6501/11251]  train loss (L_tot): 2.39735   test loss (MSE): 1.07659
+    [epoch: 3/10, batch: 7001/11251]  train loss (L_tot): 2.41715   test loss (MSE): 1.06547
+    [epoch: 3/10, batch: 7501/11251]  train loss (L_tot): 2.41926   test loss (MSE): 1.06900
+    [epoch: 3/10, batch: 8001/11251]  train loss (L_tot): 2.39972   test loss (MSE): 1.05876
+    [epoch: 3/10, batch: 8501/11251]  train loss (L_tot): 2.41555   test loss (MSE): 1.07185
+    [epoch: 3/10, batch: 9001/11251]  train loss (L_tot): 2.41352   test loss (MSE): 1.07456
+    [epoch: 3/10, batch: 9501/11251]  train loss (L_tot): 2.41341   test loss (MSE): 1.07907
+    [epoch: 3/10, batch: 10001/11251]  train loss (L_tot): 2.41187   test loss (MSE): 1.06588
+    [epoch: 3/10, batch: 10501/11251]  train loss (L_tot): 2.41922   test loss (MSE): 1.06477
+    [epoch: 3/10, batch: 11001/11251]  train loss (L_tot): 2.40835   test loss (MSE): 1.08288
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    3 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label):
+	(1, 1.0130256)  (0, 1.7732196)  (3, 1.2746186)
+
+    📝 (End of 3rd epoch) Total validation loss of DiffNets: 2.2895
+        Reconstruction loss: 1.5989
+            L1 norm: 0.6636
+            MSE: 0.9353
+        Classification error: 0.6773
+        Correlation penalty: 0.0133
+
+    🤯 Going through the 4th epoch ...
+    [epoch: 4/10, batch: 1/11251]  train loss (L_tot): 2.46650   test loss (MSE): 1.07247
+    [epoch: 4/10, batch: 501/11251]  train loss (L_tot): 2.41659   test loss (MSE): 1.08057
+    [epoch: 4/10, batch: 1001/11251]  train loss (L_tot): 2.41756   test loss (MSE): 1.07630
+    [epoch: 4/10, batch: 1501/11251]  train loss (L_tot): 2.40159   test loss (MSE): 1.06621
+    [epoch: 4/10, batch: 2001/11251]  train loss (L_tot): 2.39601   test loss (MSE): 1.07450
+    [epoch: 4/10, batch: 2501/11251]  train loss (L_tot): 2.40019   test loss (MSE): 1.07896
+    [epoch: 4/10, batch: 3001/11251]  train loss (L_tot): 2.40258   test loss (MSE): 1.07385
+    [epoch: 4/10, batch: 3501/11251]  train loss (L_tot): 2.40113   test loss (MSE): 1.07131
+    [epoch: 4/10, batch: 4001/11251]  train loss (L_tot): 2.39730   test loss (MSE): 1.07926
+    [epoch: 4/10, batch: 4501/11251]  train loss (L_tot): 2.39707   test loss (MSE): 1.06092
+    [epoch: 4/10, batch: 5001/11251]  train loss (L_tot): 2.40587   test loss (MSE): 1.08051
+    [epoch: 4/10, batch: 5501/11251]  train loss (L_tot): 2.39125   test loss (MSE): 1.07504
+    [epoch: 4/10, batch: 6001/11251]  train loss (L_tot): 2.40427   test loss (MSE): 1.07222
+    [epoch: 4/10, batch: 6501/11251]  train loss (L_tot): 2.39951   test loss (MSE): 1.07365
+    [epoch: 4/10, batch: 7001/11251]  train loss (L_tot): 2.39608   test loss (MSE): 1.07990
+    [epoch: 4/10, batch: 7501/11251]  train loss (L_tot): 2.40584   test loss (MSE): 1.07329
+    [epoch: 4/10, batch: 8001/11251]  train loss (L_tot): 2.40730   test loss (MSE): 1.07551
+    [epoch: 4/10, batch: 8501/11251]  train loss (L_tot): 2.39482   test loss (MSE): 1.06826
+    [epoch: 4/10, batch: 9001/11251]  train loss (L_tot): 2.40789   test loss (MSE): 1.07027
+    [epoch: 4/10, batch: 9501/11251]  train loss (L_tot): 2.39012   test loss (MSE): 1.06823
+    [epoch: 4/10, batch: 10001/11251]  train loss (L_tot): 2.42407   test loss (MSE): 1.07394
+    [epoch: 4/10, batch: 10501/11251]  train loss (L_tot): 2.39644   test loss (MSE): 1.06151
+    [epoch: 4/10, batch: 11001/11251]  train loss (L_tot): 2.40795   test loss (MSE): 1.06534
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+
+    📝 (End of 4th epoch) Total validation loss of DiffNets: 2.2660
+        Reconstruction loss: 1.6158
+            L1 norm: 0.5806
+            MSE: 1.0352
+        Classification error: 0.6447
+        Correlation penalty: 0.0055
+
+    🤯 Going through the 5th epoch ...
+    [epoch: 5/10, batch: 1/11251]  train loss (L_tot): 2.67245   test loss (MSE): 1.07715
+    [epoch: 5/10, batch: 501/11251]  train loss (L_tot): 2.41235   test loss (MSE): 1.06866
+    [epoch: 5/10, batch: 1001/11251]  train loss (L_tot): 2.40083   test loss (MSE): 1.06938
+    [epoch: 5/10, batch: 1501/11251]  train loss (L_tot): 2.40025   test loss (MSE): 1.06923
+    [epoch: 5/10, batch: 2001/11251]  train loss (L_tot): 2.39098   test loss (MSE): 1.07377
+    [epoch: 5/10, batch: 2501/11251]  train loss (L_tot): 2.39367   test loss (MSE): 1.06421
+    [epoch: 5/10, batch: 3001/11251]  train loss (L_tot): 2.39529   test loss (MSE): 1.06244
+    [epoch: 5/10, batch: 3501/11251]  train loss (L_tot): 2.39462   test loss (MSE): 1.07204
+    [epoch: 5/10, batch: 4001/11251]  train loss (L_tot): 2.38979   test loss (MSE): 1.06775
+    [epoch: 5/10, batch: 4501/11251]  train loss (L_tot): 2.39747   test loss (MSE): 1.06690
+    [epoch: 5/10, batch: 5001/11251]  train loss (L_tot): 2.39848   test loss (MSE): 1.05966
+    [epoch: 5/10, batch: 5501/11251]  train loss (L_tot): 2.39240   test loss (MSE): 1.05955
+    [epoch: 5/10, batch: 6001/11251]  train loss (L_tot): 2.38633   test loss (MSE): 1.07106
+    [epoch: 5/10, batch: 6501/11251]  train loss (L_tot): 2.40184   test loss (MSE): 1.07000
+    [epoch: 5/10, batch: 7001/11251]  train loss (L_tot): 2.38500   test loss (MSE): 1.06398
+    [epoch: 5/10, batch: 7501/11251]  train loss (L_tot): 2.39110   test loss (MSE): 1.06273
+    [epoch: 5/10, batch: 8001/11251]  train loss (L_tot): 2.37810   test loss (MSE): 1.07061
+    [epoch: 5/10, batch: 8501/11251]  train loss (L_tot): 2.40042   test loss (MSE): 1.06388
+    [epoch: 5/10, batch: 9001/11251]  train loss (L_tot): 2.38908   test loss (MSE): 1.06716
+    [epoch: 5/10, batch: 9501/11251]  train loss (L_tot): 2.39985   test loss (MSE): 1.06811
+    [epoch: 5/10, batch: 10001/11251]  train loss (L_tot): 2.39289   test loss (MSE): 1.06573
+    [epoch: 5/10, batch: 10501/11251]  train loss (L_tot): 2.38079   test loss (MSE): 1.06450
+    [epoch: 5/10, batch: 11001/11251]  train loss (L_tot): 2.40774   test loss (MSE): 1.06872
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    2 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label): (0, 1.0664115)  (2, 1.4488041)
+
+
+    📝 (End of 5th epoch) Total validation loss of DiffNets: 2.3044
+        Reconstruction loss: 1.6608
+            L1 norm: 0.7255
+            MSE: 0.9354
+        Classification error: 0.6248
+        Correlation penalty: 0.0187
+
+    🤯 Going through the 6th epoch ...
+    [epoch: 6/10, batch: 1/11251]  train loss (L_tot): 2.40799   test loss (MSE): 1.06859
+    [epoch: 6/10, batch: 501/11251]  train loss (L_tot): 2.40661   test loss (MSE): 1.06932
+    [epoch: 6/10, batch: 1001/11251]  train loss (L_tot): 2.38320   test loss (MSE): 1.06226
+    [epoch: 6/10, batch: 1501/11251]  train loss (L_tot): 2.39839   test loss (MSE): 1.06365
+    [epoch: 6/10, batch: 2001/11251]  train loss (L_tot): 2.39395   test loss (MSE): 1.06643
+    [epoch: 6/10, batch: 2501/11251]  train loss (L_tot): 2.39489   test loss (MSE): 1.07097
+    [epoch: 6/10, batch: 3001/11251]  train loss (L_tot): 2.39146   test loss (MSE): 1.06551
+    [epoch: 6/10, batch: 3501/11251]  train loss (L_tot): 2.39439   test loss (MSE): 1.07231
+    [epoch: 6/10, batch: 4001/11251]  train loss (L_tot): 2.39835   test loss (MSE): 1.06193
+    [epoch: 6/10, batch: 4501/11251]  train loss (L_tot): 2.38349   test loss (MSE): 1.06809
+    [epoch: 6/10, batch: 5001/11251]  train loss (L_tot): 2.37353   test loss (MSE): 1.06720
+    [epoch: 6/10, batch: 5501/11251]  train loss (L_tot): 2.39903   test loss (MSE): 1.06858
+    [epoch: 6/10, batch: 6001/11251]  train loss (L_tot): 2.40804   test loss (MSE): 1.06481
+    [epoch: 6/10, batch: 6501/11251]  train loss (L_tot): 2.39060   test loss (MSE): 1.06436
+    [epoch: 6/10, batch: 7001/11251]  train loss (L_tot): 2.37431   test loss (MSE): 1.06693
+    [epoch: 6/10, batch: 7501/11251]  train loss (L_tot): 2.38035   test loss (MSE): 1.05807
+    [epoch: 6/10, batch: 8001/11251]  train loss (L_tot): 2.39086   test loss (MSE): 1.06236
+    [epoch: 6/10, batch: 8501/11251]  train loss (L_tot): 2.39347   test loss (MSE): 1.06550
+    [epoch: 6/10, batch: 9001/11251]  train loss (L_tot): 2.40207   test loss (MSE): 1.06519
+    [epoch: 6/10, batch: 9501/11251]  train loss (L_tot): 2.38894   test loss (MSE): 1.07764
+    [epoch: 6/10, batch: 10001/11251]  train loss (L_tot): 2.39091   test loss (MSE): 1.05702
+    [epoch: 6/10, batch: 10501/11251]  train loss (L_tot): 2.38872   test loss (MSE): 1.06028
+    [epoch: 6/10, batch: 11001/11251]  train loss (L_tot): 2.38741   test loss (MSE): 1.06488
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    3 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label):
+	(1, 1.3203158)  (3, 2.6200180)  (0, 1.0281485)
+
+    📝 (End of 6th epoch) Total validation loss of DiffNets: 2.1623
+        Reconstruction loss: 1.5170
+            L1 norm: 0.6092
+            MSE: 0.9078
+        Classification error: 0.6423
+        Correlation penalty: 0.0031
+
+    🤯 Going through the 7th epoch ...
+    [epoch: 7/10, batch: 1/11251]  train loss (L_tot): 2.58238   test loss (MSE): 1.06598
+    [epoch: 7/10, batch: 501/11251]  train loss (L_tot): 2.38474   test loss (MSE): 1.05901
+    [epoch: 7/10, batch: 1001/11251]  train loss (L_tot): 2.38864   test loss (MSE): 1.05970
+    [epoch: 7/10, batch: 1501/11251]  train loss (L_tot): 2.38557   test loss (MSE): 1.06050
+    [epoch: 7/10, batch: 2001/11251]  train loss (L_tot): 2.38431   test loss (MSE): 1.05942
+    [epoch: 7/10, batch: 2501/11251]  train loss (L_tot): 2.38535   test loss (MSE): 1.06892
+    [epoch: 7/10, batch: 3001/11251]  train loss (L_tot): 2.38432   test loss (MSE): 1.06654
+    [epoch: 7/10, batch: 3501/11251]  train loss (L_tot): 2.39300   test loss (MSE): 1.06242
+    [epoch: 7/10, batch: 4001/11251]  train loss (L_tot): 2.37926   test loss (MSE): 1.06562
+    [epoch: 7/10, batch: 4501/11251]  train loss (L_tot): 2.38077   test loss (MSE): 1.06113
+    [epoch: 7/10, batch: 5001/11251]  train loss (L_tot): 2.38619   test loss (MSE): 1.06237
+    [epoch: 7/10, batch: 5501/11251]  train loss (L_tot): 2.38258   test loss (MSE): 1.06106
+    [epoch: 7/10, batch: 6001/11251]  train loss (L_tot): 2.39298   test loss (MSE): 1.06163
+    [epoch: 7/10, batch: 6501/11251]  train loss (L_tot): 2.38010   test loss (MSE): 1.06561
+    [epoch: 7/10, batch: 7001/11251]  train loss (L_tot): 2.37258   test loss (MSE): 1.05685
+    [epoch: 7/10, batch: 7501/11251]  train loss (L_tot): 2.37987   test loss (MSE): 1.05917
+    [epoch: 7/10, batch: 8001/11251]  train loss (L_tot): 2.40218   test loss (MSE): 1.06069
+    [epoch: 7/10, batch: 8501/11251]  train loss (L_tot): 2.37379   test loss (MSE): 1.05546
+    [epoch: 7/10, batch: 9001/11251]  train loss (L_tot): 2.37608   test loss (MSE): 1.06620
+    [epoch: 7/10, batch: 9501/11251]  train loss (L_tot): 2.38642   test loss (MSE): 1.05959
+    [epoch: 7/10, batch: 10001/11251]  train loss (L_tot): 2.39112   test loss (MSE): 1.05794
+    [epoch: 7/10, batch: 10501/11251]  train loss (L_tot): 2.36471   test loss (MSE): 1.05822
+    [epoch: 7/10, batch: 11001/11251]  train loss (L_tot): 2.39367   test loss (MSE): 1.05909
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    4 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label):
+	(2, 1.1634786)  (1, 1.9613289)  (3, 1.2912272)  (2, 1.2255940)
+
+
+    📝 (End of 7th epoch) Total validation loss of DiffNets: 2.6846
+        Reconstruction loss: 1.9680
+            L1 norm: 0.8015
+            MSE: 1.1665
+        Classification error: 0.7075
+        Correlation penalty: 0.0091
+
+    🤯 Going through the 8th epoch ...
+    [epoch: 8/10, batch: 1/11251]  train loss (L_tot): 2.20664   test loss (MSE): 1.05824
+    [epoch: 8/10, batch: 501/11251]  train loss (L_tot): 2.37126   test loss (MSE): 1.06223
+    [epoch: 8/10, batch: 1001/11251]  train loss (L_tot): 2.37388   test loss (MSE): 1.06248
+    [epoch: 8/10, batch: 1501/11251]  train loss (L_tot): 2.38712   test loss (MSE): 1.06199
+    [epoch: 8/10, batch: 2001/11251]  train loss (L_tot): 2.38091   test loss (MSE): 1.05594
+    [epoch: 8/10, batch: 2501/11251]  train loss (L_tot): 2.39405   test loss (MSE): 1.05704
+    [epoch: 8/10, batch: 3001/11251]  train loss (L_tot): 2.38792   test loss (MSE): 1.06114
+    [epoch: 8/10, batch: 3501/11251]  train loss (L_tot): 2.38421   test loss (MSE): 1.06245
+    [epoch: 8/10, batch: 4001/11251]  train loss (L_tot): 2.37725   test loss (MSE): 1.05488
+    [epoch: 8/10, batch: 4501/11251]  train loss (L_tot): 2.36910   test loss (MSE): 1.06266
+    [epoch: 8/10, batch: 5001/11251]  train loss (L_tot): 2.36550   test loss (MSE): 1.05289
+    [epoch: 8/10, batch: 5501/11251]  train loss (L_tot): 2.37215   test loss (MSE): 1.05526
+    [epoch: 8/10, batch: 6001/11251]  train loss (L_tot): 2.37674   test loss (MSE): 1.05933
+    [epoch: 8/10, batch: 6501/11251]  train loss (L_tot): 2.39315   test loss (MSE): 1.05726
+    [epoch: 8/10, batch: 7001/11251]  train loss (L_tot): 2.38138   test loss (MSE): 1.05101
+    [epoch: 8/10, batch: 7501/11251]  train loss (L_tot): 2.38646   test loss (MSE): 1.05671
+    [epoch: 8/10, batch: 8001/11251]  train loss (L_tot): 2.38074   test loss (MSE): 1.05572
+    [epoch: 8/10, batch: 8501/11251]  train loss (L_tot): 2.36879   test loss (MSE): 1.05684
+    [epoch: 8/10, batch: 9001/11251]  train loss (L_tot): 2.37289   test loss (MSE): 1.05550
+    [epoch: 8/10, batch: 9501/11251]  train loss (L_tot): 2.37317   test loss (MSE): 1.05519
+    [epoch: 8/10, batch: 10001/11251]  train loss (L_tot): 2.35848   test loss (MSE): 1.05679
+    [epoch: 8/10, batch: 10501/11251]  train loss (L_tot): 2.35745   test loss (MSE): 1.05873
+    [epoch: 8/10, batch: 11001/11251]  train loss (L_tot): 2.38675   test loss (MSE): 1.05017
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+
+    📝 (End of 8th epoch) Total validation loss of DiffNets: 3.3926
+        Reconstruction loss: 2.6756
+            L1 norm: 0.9615
+            MSE: 1.7141
+        Classification error: 0.7036
+        Correlation penalty: 0.0134
+
+    🤯 Going through the 9th epoch ...
+    2 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label): (1, 1.2365105)  (0, 1.3026092)
+
+    [epoch: 9/10, batch: 1/11251]  train loss (L_tot): 2.26045   test loss (MSE): 1.05409
+    [epoch: 9/10, batch: 501/11251]  train loss (L_tot): 2.38138   test loss (MSE): 1.06108
+    [epoch: 9/10, batch: 1001/11251]  train loss (L_tot): 2.37589   test loss (MSE): 1.05266
+    [epoch: 9/10, batch: 1501/11251]  train loss (L_tot): 2.37757   test loss (MSE): 1.05585
+    [epoch: 9/10, batch: 2001/11251]  train loss (L_tot): 2.37345   test loss (MSE): 1.05830
+    [epoch: 9/10, batch: 2501/11251]  train loss (L_tot): 2.36993   test loss (MSE): 1.06083
+    [epoch: 9/10, batch: 3001/11251]  train loss (L_tot): 2.37192   test loss (MSE): 1.04977
+    [epoch: 9/10, batch: 3501/11251]  train loss (L_tot): 2.36648   test loss (MSE): 1.05499
+    [epoch: 9/10, batch: 4001/11251]  train loss (L_tot): 2.37797   test loss (MSE): 1.05680
+    [epoch: 9/10, batch: 4501/11251]  train loss (L_tot): 2.37012   test loss (MSE): 1.05519
+    [epoch: 9/10, batch: 5001/11251]  train loss (L_tot): 2.36424   test loss (MSE): 1.05713
+    [epoch: 9/10, batch: 5501/11251]  train loss (L_tot): 2.38403   test loss (MSE): 1.05491
+    [epoch: 9/10, batch: 6001/11251]  train loss (L_tot): 2.37264   test loss (MSE): 1.05225
+    [epoch: 9/10, batch: 6501/11251]  train loss (L_tot): 2.36370   test loss (MSE): 1.05606
+    [epoch: 9/10, batch: 7001/11251]  train loss (L_tot): 2.36740   test loss (MSE): 1.05563
+    [epoch: 9/10, batch: 7501/11251]  train loss (L_tot): 2.37589   test loss (MSE): 1.05429
+    [epoch: 9/10, batch: 8001/11251]  train loss (L_tot): 2.37798   test loss (MSE): 1.05344
+    [epoch: 9/10, batch: 8501/11251]  train loss (L_tot): 2.38243   test loss (MSE): 1.05352
+    [epoch: 9/10, batch: 9001/11251]  train loss (L_tot): 2.37710   test loss (MSE): 1.05712
+    [epoch: 9/10, batch: 9501/11251]  train loss (L_tot): 2.36427   test loss (MSE): 1.05432
+    [epoch: 9/10, batch: 10001/11251]  train loss (L_tot): 2.37363   test loss (MSE): 1.05783
+    [epoch: 9/10, batch: 10501/11251]  train loss (L_tot): 2.38787   test loss (MSE): 1.05501
+    [epoch: 9/10, batch: 11001/11251]  train loss (L_tot): 2.36194   test loss (MSE): 1.05288
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+    4 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label):
+	(2, 1.0209883)  (0, 1.9840342)  (2, 1.2777153)  (1, 1.4008070)
+
+
+    📝 (End of 9th epoch) Total validation loss of DiffNets: 2.2657
+        Reconstruction loss: 1.5817
+            L1 norm: 0.5991
+            MSE: 0.9826
+        Classification error: 0.6580
+        Correlation penalty: 0.0260
+
+    🤯 Going through the 10th epoch ...
+    [epoch: 10/10, batch: 1/11251]  train loss (L_tot): 2.40216   test loss (MSE): 1.05384
+    [epoch: 10/10, batch: 501/11251]  train loss (L_tot): 2.38711   test loss (MSE): 1.05115
+    [epoch: 10/10, batch: 1001/11251]  train loss (L_tot): 2.35321   test loss (MSE): 1.05423
+    [epoch: 10/10, batch: 1501/11251]  train loss (L_tot): 2.36951   test loss (MSE): 1.05006
+    [epoch: 10/10, batch: 2001/11251]  train loss (L_tot): 2.36204   test loss (MSE): 1.05510
+    [epoch: 10/10, batch: 2501/11251]  train loss (L_tot): 2.35324   test loss (MSE): 1.04893
+    [epoch: 10/10, batch: 3001/11251]  train loss (L_tot): 2.35557   test loss (MSE): 1.04958
+    [epoch: 10/10, batch: 3501/11251]  train loss (L_tot): 2.36270   test loss (MSE): 1.05194
+    [epoch: 10/10, batch: 4001/11251]  train loss (L_tot): 2.37914   test loss (MSE): 1.05246
+    [epoch: 10/10, batch: 4501/11251]  train loss (L_tot): 2.35598   test loss (MSE): 1.05475
+    [epoch: 10/10, batch: 5001/11251]  train loss (L_tot): 2.36785   test loss (MSE): 1.05255
+    [epoch: 10/10, batch: 5501/11251]  train loss (L_tot): 2.35039   test loss (MSE): 1.05345
+    [epoch: 10/10, batch: 6001/11251]  train loss (L_tot): 2.38958   test loss (MSE): 1.05213
+    [epoch: 10/10, batch: 6501/11251]  train loss (L_tot): 2.35566   test loss (MSE): 1.05128
+    [epoch: 10/10, batch: 7001/11251]  train loss (L_tot): 2.36130   test loss (MSE): 1.05836
+    [epoch: 10/10, batch: 7501/11251]  train loss (L_tot): 2.35989   test loss (MSE): 1.04827
+    [epoch: 10/10, batch: 8001/11251]  train loss (L_tot): 2.37353   test loss (MSE): 1.05297
+    [epoch: 10/10, batch: 8501/11251]  train loss (L_tot): 2.37104   test loss (MSE): 1.04839
+    [epoch: 10/10, batch: 9001/11251]  train loss (L_tot): 2.36031   test loss (MSE): 1.05161
+    [epoch: 10/10, batch: 9501/11251]  train loss (L_tot): 2.36848   test loss (MSE): 1.05287
+    [epoch: 10/10, batch: 10001/11251]  train loss (L_tot): 2.36737   test loss (MSE): 1.05354
+    [epoch: 10/10, batch: 10501/11251]  train loss (L_tot): 2.37340   test loss (MSE): 1.05056
+    [epoch: 10/10, batch: 11001/11251]  train loss (L_tot): 2.38560   test loss (MSE): 1.04964
+
+    Applying the expectation maximization (EM) algorithm ...
+    Number of samples in the traing set: 360004
+    em_batch_size=150 -> 2401 EM batches
+
+    📝 (End of 10th epoch) Total validation loss of DiffNets: 3.0991
+        Reconstruction loss: 2.4115
+            L1 norm: 0.9139
+            MSE: 1.4977
+        Classification error: 0.6649
+        Correlation penalty: 0.0227
+
+Finished training the DiffNets! 🍺🍺🍺
+
+    1 out of 4 classification labels are larger than 1.
+    Here are the paris of (variant_idx, label): (3, 1.6620588)
+
+Thanks for using enspara! Please read and cite the folllowing articles:
+{'title': 'Enspara: Modeling molecular ensembles with scalable data structures and parallel computing', 'authors': ['Porter Justin, R', 'Zimmerman, Maxwell I', 'Bowman, Gregory R'], 'journal': 'JCP', 'year': 2019, 'doi': '10.1063/1.5063794@jcp.2019.MMMK.issue-1'}
+
+Time elapsed: 1 hour(s) 18 minute(s) 52 second(s)
+
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-478:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-445:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-465:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-438:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-392:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-454:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-499:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-440:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-441:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-429:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-409:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-468:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-491:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-495:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-462:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-414:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-431:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-479:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-418:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-509:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-461:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-436:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-502:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-511:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-430:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-470:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-402:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-446:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-472:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-404:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-477:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-428:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-467:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-476:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-444:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-501:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-503:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-484:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+
+Thanks for using enspara! Please read and cite the folllowing articles:
+{'title': 'Enspara: Modeling molecular ensembles with scalable data structures and parallel computing', 'authors': ['Porter Justin, R', 'Zimmerman, Maxwell I', 'Bowman, Gregory R'], 'journal': 'JCP', 'year': 2019, 'doi': '10.1063/1.5063794@jcp.2019.MMMK.issue-1'}
+
+Time elapsed: 46.647791 second(s)
+
+Part 2: Perform sanity checks for the trained DiffNets ...
+============================================================
+[ Check 1: Average reconstructed RMSD ]
+
+Part 1: Perform standard data analysis for the trained DiffNets ...
+=====================================================================
+Encoding the input trajectories into latent space data ...
+    Input trajectories encoded!
+
+Decoding the latent space data to recontruct the trajectories ...
+    Trajectories reconstructed!
+
+Getting the classification labels for all frames in all input trajectories ...
+    Classification labels for all frames calculated!
+
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-508:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-421:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-389:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 335, in get
+    res = self._reader.recv_bytes()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/connection.py", line 407, in _recv_bytes
+    buf = self._recv(4)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/connection.py", line 379, in _recv
+    chunk = read(handle, remaining)
+KeyboardInterrupt
+Process ForkPoolWorker-433:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-439:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-493:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+  1%|          | 76/10001 [00:13<28:38,  5.77it/s]Process ForkPoolWorker-482:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-429:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-404:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-395:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-450:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-403:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-512:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-428:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-462:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-440:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-430:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-492:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-490:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-426:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-409:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-466:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-469:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-505:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-480:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-445:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-441:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+Process ForkPoolWorker-451:
+Traceback (most recent call last):
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/queues.py", line 334, in get
+    with self._rlock:
+  File "/jet/home/wehs7661/.conda/envs/diffnets/lib/python3.6/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+
+Thanks for using enspara! Please read and cite the folllowing articles:
+{'title': 'Enspara: Modeling molecular ensembles with scalable data structures and parallel computing', 'authors': ['Porter Justin, R', 'Zimmerman, Maxwell I', 'Bowman, Gregory R'], 'journal': 'JCP', 'year': 2019, 'doi': '10.1063/1.5063794@jcp.2019.MMMK.issue-1'}
+
+Time elapsed: 25.921642 second(s)
+
+Part 2: Perform sanity checks for the trained DiffNets ...
+============================================================
+[ Check 1: Average reconstructed RMSD ]
+
+Part 1: Perform standard data analysis for the trained DiffNets ...
+=====================================================================
+Encoding the input trajectories into latent space data ...
+    Input trajectories encoded!
+
+Decoding the latent space data to recontruct the trajectories ...
+    Trajectories reconstructed!
+
+Getting the classification labels for all frames in all input trajectories ...
+    Classification labels for all frames calculated!
+
+Calculating the RMSD between the reconstructed trajectories and the input trajectories ...
+Thanks for using enspara! Please read and cite the folllowing articles:
+{'title': 'Enspara: Modeling molecular ensembles with scalable data structures and parallel computing', 'authors': ['Porter Justin, R', 'Zimmerman, Maxwell I', 'Bowman, Gregory R'], 'journal': 'JCP', 'year': 2019, 'doi': '10.1063/1.5063794@jcp.2019.MMMK.issue-1'}
+
+Time elapsed: 23.942839 second(s)
+
+Part 2: Perform sanity checks for the trained DiffNets ...
+============================================================
+[ Check 1: Average reconstructed RMSD ]
+
+Part 1: Perform standard data analysis for the trained DiffNets ...
+=====================================================================
+Encoding the input trajectories into latent space data ...
+    Input trajectories encoded!
+
+Decoding the latent space data to recontruct the trajectories ...
+    Trajectories reconstructed!
+
+Getting the classification labels for all frames in all input trajectories ...
+    Classification labels for all frames calculated!
+
+Calculating the RMSD between the reconstructed trajectories and the input trajectories ...
+Thanks for using enspara! Please read and cite the folllowing articles:
+{'title': 'Enspara: Modeling molecular ensembles with scalable data structures and parallel computing', 'authors': ['Porter Justin, R', 'Zimmerman, Maxwell I', 'Bowman, Gregory R'], 'journal': 'JCP', 'year': 2019, 'doi': '10.1063/1.5063794@jcp.2019.MMMK.issue-1'}
+
+Time elapsed: 52.509861 second(s)
+
+Part 2: Perform sanity checks for the trained DiffNets ...
+============================================================
+[ Check 1: Average reconstructed RMSD ]
