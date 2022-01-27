@@ -79,6 +79,20 @@ def initialize():
         help="The cutoff distance from the residue of interest, within which the residues will be "
              "classified in the focused region. (Default: 1.0 nm)"
     )
+    parser.add_argument(
+        "-c",
+        "--cluster",
+        default=False,
+        action="store_true",
+        help="Whether to find the cluster centroid and use it as the reference structure."
+    )
+    parser.add_argument(
+        "-ref",
+        "--ref",
+        default=None,
+        help="The filename of the reference structure pdb. If the argument is not specified, the first variant pdb will be used."
+    )
+    
 
     args_parse = parser.parse_args()
 
@@ -192,6 +206,9 @@ if __name__ == "__main__":
 
     # Step 0: Setting things up
     logger(f'Command line: {" ".join(sys.argv)}')
+    if args.cluster is True and args.ref is not None:
+        raise ImproperlyConfigured(
+            f'The arguments cluster and ref should not be specified at the same time!')
     if args.variants is None:
         if args.property == '1':  # dimerization propensity
             args.variants = [1, 9, 10, 13]
@@ -292,7 +309,13 @@ if __name__ == "__main__":
         with open('results_run_diffnets.txt', 'a') as f, stdout_redirected(f):
             with merged_stderr_stdout():
                 # Below we run the command and get its maximum memory usage
-                cmd = f'{main_code} process ./traj_dirs.npy ./pdb_fns.npy ./whitened_data -aatom_sel.npy -sstride.npy'
+                if args.ref is None:
+                    if args.cluster is False:
+                        cmd = f'{main_code} process ./traj_dirs.npy ./pdb_fns.npy ./whitened_data -aatom_sel.npy -sstride.npy'
+                    else:
+                        cmd = f'{main_code} process ./traj_dirs.npy ./pdb_fns.npy ./whitened_data -aatom_sel.npy -sstride.npy -c'
+                else:
+                    cmd = f'{main_code} process ./traj_dirs.npy ./pdb_fns.npy ./whitened_data -aatom_sel.npy -sstride.npy -r{args.ref}'
                 mem = memory_usage((run_command, (cmd,)))
                 max_mem, max_mem_percent = convert_memory_units(np.max(mem))
 

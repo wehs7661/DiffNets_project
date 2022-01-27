@@ -5,6 +5,9 @@ import numpy as np
 import time
 import datetime
 import pickle
+import natsort
+import glob
+import mdtraj as md 
 import matplotlib.pyplot as plt
 from matplotlib import rc
 from collections import defaultdict
@@ -95,6 +98,7 @@ if __name__ == "__main__":
     rc("mathtext", **{"default": "regular"})
     plt.rc("font", family="serif")
 
+    logger(f'Command line: {" ".join(sys.argv)}')
     if '1' in args.actions:
         logger('\nPart 1: Perform standard data analysis for the trained DiffNets ...')
         logger('=====================================================================')
@@ -113,7 +117,15 @@ if __name__ == "__main__":
         logger('==================================================================')
         t1 = time.time()
 
-        logger('Performing sanity checks ...')
+        logger('Assessing the quality of trajectory alignment ...')
+        xtc_files = natsort.natsorted(glob.glob('./whitened_data/aligned_xtcs/*.xtc'))
+        top = './whitened_data/master.pdb'
+        for i in xtc_files:
+            traj = md.load(i, top=top)
+            rmsd = md.rmsd(traj, md.load(top))
+            logger(f'    The average RMSD of the trajectory {i.split("/")[-1]} w.r.t the reference is {np.mean(rmsd):.3f} nm.')
+
+        logger('\nPerforming sanity checks ...')
         logger('    [ Check 1: Average reconstructed RMSD ]')
         rmsd = np.load(os.path.join(args.diffnets, "rmsd.npy"))  # nm
         logger(f'    ==> Result: The average RMSD is {np.mean(rmsd) * 10:.2f} angstrom.')
