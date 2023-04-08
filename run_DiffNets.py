@@ -80,17 +80,21 @@ def initialize():
              "classified in the focused region. (Default: 1.0 nm)"
     )
     parser.add_argument(
-        "-c",
-        "--cluster",
-        default=False,
-        action="store_true",
-        help="Whether to find the cluster centroid and use it as the reference structure."
+        "-me",
+        "--method",
+        default='first_var',
+        choices=['first_var', 'cluster', 'minimize', 'config'], 
+        help="The method for generating the reference structure. There are the following 4 options:"
+              "(1) first_var: The PDB file of the first variant will be used as the reference."
+              "(2) cluster: The centroid obtained from clustering analysis will be used as the reference."
+              "(3) minimize: The structure that minimizes the average alighment RMSD will be used as the reference."
+              "(4) config: The given PDB/GRO structure will be directly used as the reference."
     )
     parser.add_argument(
         "-ref",
         "--ref",
         default=None,
-        help="The filename of the reference structure pdb. If the argument is not specified, the first variant pdb will be used."
+        help="The filename of the reference structure pdb. The selected method will be overwritten anyway if a pdb is provided."
     )
     
 
@@ -206,9 +210,7 @@ if __name__ == "__main__":
 
     # Step 0: Setting things up
     logger(f'Command line: {" ".join(sys.argv)}')
-    if args.cluster is True and args.ref is not None:
-        raise ImproperlyConfigured(
-            f'The arguments cluster and ref should not be specified at the same time!')
+
     if args.variants is None:
         if args.property == '1':  # dimerization propensity
             args.variants = [1, 9, 10, 13]
@@ -306,15 +308,21 @@ if __name__ == "__main__":
         print(f'Total available memory: {psutil.virtual_memory().total}')
         t1 = time.time()
 
+        logger(f'Selected method for generating the reference structure: {args.method}')
+        
+        if args.ref is not None and args.method != 'pdb':
+            logger(f'Note: The selected method {args.method} is overwritten since a pdb file is provided.')
+        
+        if args.ref is None and args.method == 'pdb':
+            raise ImproperlyConfigured(
+                f'The method "pdb" was selected for reference generation but a PDB file was not given.')    
+
         with open('results_run_diffnets.txt', 'a') as f, stdout_redirected(f):
             with merged_stderr_stdout():
                 # Below we run the command and get its maximum memory usage
-                if args.ref is None:
-                    if args.cluster is False:
-                        cmd = f'{main_code} process ./traj_dirs.npy ./pdb_fns.npy ./whitened_data -aatom_sel.npy -sstride.npy'
-                    else:
-                        cmd = f'{main_code} process ./traj_dirs.npy ./pdb_fns.npy ./whitened_data -aatom_sel.npy -sstride.npy -c'
-                else:
+                if args.ref is None:  # One of the following methods is used : first_var, cluster, minimize
+                    cmd = f'{main_code} process ./traj_dirs.npy ./pdb_fns.npy ./whitened_data -aatom_sel.npy -sstride.npy -m{args.method}'
+                else:  # The method "config" is used 
                     cmd = f'{main_code} process ./traj_dirs.npy ./pdb_fns.npy ./whitened_data -aatom_sel.npy -sstride.npy -r{args.ref}'
                 mem = memory_usage((run_command, (cmd,)))
                 max_mem, max_mem_percent = convert_memory_units(np.max(mem))
